@@ -1,5 +1,7 @@
 # Change, troubleshooting and rollback
 
+**Terms used here:** DNS turns a service name into the network address used to reach it.
+
 ## Before a real change
 
 1. Identify the exact root/state owner of the VNet, peering, DNS zone and target service. Shared resource ownership does not mean every definition belongs in one state.

@@ -1,5 +1,7 @@
 # Local validation — November 6, 2026
 
+**Terms used here:** A private endpoint gives a supported service an address on a private network; access permissions still apply. DNS turns a service name into the network address used to reach it.
+
 | Check | Observed result |
 | --- | --- |
 | Python standard-library unit tests | 14 passed |
@@ -12,7 +14,7 @@
 | Navigation/mobile | All three tabs and 390px layout passed |
 | Browser isolation | Zero page errors and external requests |
 
-The public wrapper initially had a multi-argument variable formatted as an invalid single-line HCL block. It was corrected before provider initialization; validation and all three mock cases then passed. No live plan/apply or resource read occurred.
+The public wrapper initially had a multi-argument variable formatted as an invalid single-line HCL block. It was corrected before provider initialization; validation and all three cases using simulated responses then passed. No live plan/apply or resource read occurred.
 
 Tests reject overlapping/escaped ranges, duplicate/unknown peerings and a one-sided connection assumption. A fictional additional hub-peered spoke does not produce a direct spoke relationship in this deliberately narrow model. Prefixes and production transit flags are compared with the selected copied source.
 

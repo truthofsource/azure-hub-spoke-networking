@@ -1,5 +1,7 @@
 # Scaling, strengths and tradeoffs
 
+**Terms used here:** A private endpoint gives a supported service an address on a private network; access permissions still apply. DNS turns a service name into the network address used to reach it.
+
 | Choice | Strength | Weakness / tradeoff |
 | --- | --- | --- |
 | Hub/application-spoke pair | Shared connectivity ownership and separate workload addressing | Peering configuration, traffic cost and route coordination |

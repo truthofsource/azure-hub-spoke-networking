@@ -1,5 +1,7 @@
 # Routing, DNS and authorization are independent
 
+**Terms used here:** A managed identity lets an Azure service request access without storing a password in the application. A private endpoint gives a supported service an address on a private network; access permissions still apply.
+
 ## Direct peering and transit
 
 The source contains two reciprocal production peering resources. Both enable VNet access while leaving forwarded traffic, gateway transit and remote-gateway use false. Peering supplies direct connectivity declarations; it does not automatically create a spoke-to-spoke transit path. Actual flows still depend on routes, NSGs and endpoints. [Microsoft VNet peering overview](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview).
@@ -22,6 +24,6 @@ The offline model stores only the selected SQL-link declaration. It performs no 
 | Worker | Does the worker environment use the expected network and DNS? | Are its runtime scopes limited to the right workload? |
 | Hosted CI | Can this runner resolve/reach the target? It is not automatically in a spoke. | Can its federated identity deploy only the reviewed scope? |
 | Operator | Is access through the reviewed management path or a bounded exception? | Does the signed-in identity have the required read/action rights? |
-| Recovery environment | Do isolated restore callers reach only intended recovery services? | Can they restore without gaining broad permanent access? |
+| Recovery environment | Do restore into a separate test environment callers reach only intended recovery services? | Can they restore without gaining broad permanent access? |
 
 Additional storage/vault endpoints remain plans by owner choice. Creating a private endpoint can affect public DNS behavior before every caller is ready, so an “unlinked” preparation alone does not prove zero impact. Do not close public access based solely on a diagram or a successful test from one VM.

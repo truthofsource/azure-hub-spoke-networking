@@ -1,5 +1,7 @@
 # Commands and ClickOps
 
+**Terms used here:** DNS turns a service name into the network address used to reach it.
+
 ## Offline checks — performed for this portfolio
 
 ```bash

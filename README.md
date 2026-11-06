@@ -1,6 +1,6 @@
 # Azure Hub-and-Spoke Networking and Shared Services
 
-**Create room to grow without treating every network, service and permission as one shared boundary.**
+**Separate application networks while keeping shared connections organized.**
 
 [Business problem](#the-business-problem) · [Solution](#the-solution) · [What was built](#what-was-built) · [Proof it works](#proof-it-works) · [Commands](docs/COMMANDS.md)
 
@@ -8,15 +8,13 @@
 
 ## The Business Problem
 
-A healthcare-services operations platform needed separate production and test environments, private database/document paths, and shared engineering and monitoring services. Adding networks one resource at a time made it easy to overlap addresses, confuse resource ownership with network placement or assume a service became private merely because it lived in a hub subscription.
-
-The design also had a cost constraint: reserve space for future connectivity controls without automatically deploying a Firewall, gateway or DNS Resolver. Existing application, deployment and recovery callers still needed a clear access path.
+Production, testing and shared engineering services need clear network boundaries. Adding connections without a plan can create overlapping address ranges or unexpected access. The design also needed room to grow without immediately paying for a firewall, gateway or DNS Resolver service.
 
 ## The Solution
 
-Implement a production connectivity hub and application spoke with reciprocal VNet peering, explicit integration/endpoint subnets and reserved network-service capacity. Reuse the actual network module for workload environments. Keep shared engineering services and operational/security workspaces in separately owned roots, and distinguish VNet routing from DNS, identity and service access policy.
+Use a central network, called a hub, and a separate application network, called a spoke. Define the connections and address ranges explicitly, reserve space for future services, and keep shared engineering services separately owned. Network connections, name lookup and data permissions are checked separately.
 
-**Business outcome:** A repeatable network foundation with clear workload boundaries and room for growth, while avoiding accidental paid-service activation and misleading claims about transitive routing or private access.
+**Business outcome:** Provide an organized network foundation that can grow without assuming every connected system can access every other system.
 
 ### Actual implementation
 
@@ -27,7 +25,7 @@ Implement a production connectivity hub and application spoke with reciprocal VN
 - Both production peerings allow VNet access and keep forwarded traffic, gateway transit and remote-gateway use **Off**.
 - Firewall, resolver and gateway subnet reservations do **not** create those services.
 
-The project includes actual selected Terraform with example resource names, plus a small new offline topology viewer and address-policy checks. This is source-derived evidence, not a fresh Azure inventory or live packet test. [Source mapping](docs/SOURCE-MAP.md).
+The project includes actual selected Terraform with example resource names, plus a small new offline topology viewer and address-policy checks. This is evidence based on the source code, not a fresh Azure inventory or live packet test. [Source mapping](docs/SOURCE-MAP.md).
 
 ## Architecture
 
@@ -59,7 +57,7 @@ The isolated boxes are deliberate: the selected source does not prove a route fr
 | Component | Purpose | Source |
 | --- | --- | --- |
 | Reusable network module | Resource group, VNet, delegated Functions integration and endpoint subnet | [Module](infra/modules/network/) |
-| Production hub and spoke | Actual address plan, reservations and reciprocal peering | [Hub](infra/modules/foundation/hub.tf) · [Spoke](infra/modules/foundation/network.tf) |
+| Production hub and spoke | Actual address plan, reservations and peering configured in both directions | [Hub](infra/modules/foundation/hub.tf) · [Spoke](infra/modules/foundation/network.tf) |
 | Default-Off public wrapper | Make local validation reproducible without selecting cloud resources by default | [Root](infra/main.tf) |
 | Nonproduction network reference | Show environment-specific inputs to the same module | [Source](reference/nonproduction/network.tf) |
 | Shared engineering VNet reference | Show separate network ownership and reserved managed-service subnets | [Source](reference/shared-services/network.tf) |
@@ -97,7 +95,7 @@ terraform -chdir=infra validate
 terraform -chdir=infra test
 ```
 
-**Look for:** three mock cases verify default-Off selection, the actual address/reservation plan and both peerings' access/transit flags. No Azure plan/apply or resource lookup occurs.
+**Look for:** three cases using simulated responses verify default-Off selection, the actual address/reservation plan and both peerings' access/transit flags. No Azure plan/apply or resource lookup occurs.
 
 ### 4. Inspect the local topology
 
@@ -134,7 +132,7 @@ Hub-and-spoke centralizes connectivity ownership and reserves expansion capacity
 
 | Guide | Purpose |
 | --- | --- |
-| [Architecture](docs/ARCHITECTURE.md) | Actual topology and evidence boundaries |
+| [Architecture](docs/ARCHITECTURE.md) | Actual topology and limits of what the evidence proves |
 | [Address plan](docs/ADDRESS-PLAN.md) | CIDRs, subnets, reservations and growth |
 | [Shared-service placement](docs/SHARED-SERVICES.md) | Hub versus services VNet/subscription |
 | [Routing and DNS](docs/ROUTING-AND-DNS.md) | Peering, transit, private resolution and identity |

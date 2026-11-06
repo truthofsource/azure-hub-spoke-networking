@@ -11,6 +11,6 @@ The hub reserves 10.30.0.0/26 for AzureFirewallSubnet, 10.30.0.128/26 for AzureF
 
 Production uses 10.40.1.0/24 for Functions integration, 10.40.2.0/24 for private endpoints and reserves 10.40.3.0/24 for future integration. Nonproduction uses corresponding 10.20.1.0/24 and 10.20.2.0/24 ranges. The shared engineering root reserves 10.50.0.0/23, 10.50.2.0/27 and 10.50.2.32/27 for managed alternatives; the broader VM profile has its own additional subnet outside the selected reservation reference.
 
-`data/topology.json` is an explicit source-derived snapshot. Tests compare each included prefix to mapped Terraform and reject overlapping VNet/subnet ranges, escaped subnets and duplicate peerings. Python's ipaddress library validates strict network boundaries; this is not a live address-management system or Terraform parser.
+`data/topology.json` is an explicit record based on the selected source code. Tests compare each included prefix to mapped Terraform and reject overlapping VNet/subnet ranges, escaped subnets and duplicate peerings. Python's ipaddress library validates strict network boundaries; this is not a live address-management system or Terraform parser.
 
 When adding a network, compare against all on-premises, cloud, VPN and peered ranges—not just these four. Reserve growth around integration/delegated subnets, review service-specific subnet requirements and verify limits/costs at the time of commissioning. CIDR changes to used networks/subnets may replace resources or disrupt callers; review the plan and rollback before changing them.

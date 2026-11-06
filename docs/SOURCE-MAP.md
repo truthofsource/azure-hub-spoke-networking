@@ -1,5 +1,7 @@
 # Actual source and public adaptations
 
+**Terms used here:** DNS turns a service name into the network address used to reach it.
+
 [Machine mapping](source-map.json) records the original selected file hashes and public locations. Company names and resource labels use neutral examples; no real subscription IDs, endpoint IPs, state, credentials or employee records are included. RFC1918 CIDRs describe the selected architecture but are not reachable targets.
 
 | Source area | Public use | Adaptation |
@@ -11,7 +13,7 @@
 | Engineering-services network | Reference only | Neutral labels; no claimed production peering |
 | Monitoring and security definitions | Reference only | Different workspace/ingestion purposes preserved; no new sink activation |
 | SQL/documents networking | Reference only | Existing DNS/endpoint pattern shown; owning database/storage/modules not redeployed |
-| Offline model and viewer | New source-derived reference | Explicit snapshot, address/relationship checks and local screenshots |
+| Offline model and viewer | New example based on the source code | Explicit snapshot, address/relationship checks and local screenshots |
 
 The offline checks are deliberately narrow. They validate address consistency and selected source settings; they are not a Terraform parser, Azure route calculator or firewall/authentication simulator. Missing peerings mean “not defined in this selected source,” not proof that no alternative live route can exist anywhere.
 

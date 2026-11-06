@@ -1,5 +1,7 @@
 # Actual topology versus a reference diagram
 
+**Terms used here:** A private endpoint gives a supported service an address on a private network; access permissions still apply.
+
 The production root defines a connectivity hub (10.30.0.0/16) and application spoke (10.40.0.0/16) in Central US, with a separate peering resource in each direction. Both allow VNet access and disable forwarded traffic, gateway transit and remote gateways. The source defines no Firewall/NVA or user-defined transit route in this selected foundation.
 
 The reusable network module creates the spoke resource group, VNet, integration subnet delegated to Microsoft.App/environments for the selected Functions Flex pattern, and a separate endpoint subnet. Production selects Key Vault and Storage.Global service endpoint entries on integration. Service endpoint entries are not private endpoint NICs and do not close service public access by themselves.
@@ -10,7 +12,7 @@ Nonproduction's application VNet (10.20.0.0/16) is also shown as a separate envi
 
 | Statement | Supported by this project? |
 | --- | --- |
-| Production reciprocal peering is defined | Yes, actual selected Terraform |
+| Production peering configured in both directions is defined | Yes, actual selected Terraform |
 | Every spoke has automatic transit through the hub | No |
 | Shared engineering services are in the production hub | No; separate network/root |
 | Workspaces and registry are VMs in a hub subnet | No |

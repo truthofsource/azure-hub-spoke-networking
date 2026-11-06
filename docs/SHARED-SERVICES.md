@@ -1,5 +1,7 @@
 # Hub, services VNet or separate subscription?
 
+**Terms used here:** A private endpoint gives a supported service an address on a private network; access permissions still apply. DNS turns a service name into the network address used to reach it.
+
 Treat three questions separately: who owns a resource, which network it uses, and who may access it. An Azure subscription/resource group is an ownership and policy scope. A VNet/subnet is a network boundary. A service endpoint or private endpoint changes an access path; it does not grant application or data permissions.
 
 ## Connectivity hub
@@ -8,7 +10,7 @@ Place shared transit/network services under connectivity ownership: gateway, ins
 
 ## Shared-service boundary
 
-A developer portal, build tooling or other shared application can use a separate services VNet/resource group and, as scale warrants, its own subscription. That avoids making application lifecycle and restore work part of the transit hub's blast radius. Backstage's separate engineering VNet is the actual example here. Do not infer a production connection simply because both resources have “hub” in their names.
+A developer portal, build tooling or other shared application can use a separate services VNet/resource group and, as scale warrants, its own subscription. That avoids making application lifecycle and restore work part of the transit hub's range of systems a failure could affect. Backstage's separate engineering VNet is the actual example here. Do not infer a production connection simply because both resources have “hub” in their names.
 
 ## Managed Azure services
 
