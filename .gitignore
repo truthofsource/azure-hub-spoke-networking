@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.terraform/
+*.tfstate*
+*.tfplan
+*.tfvars
+*.auto.tfvars.json
+.env
+node_modules/
+dist/

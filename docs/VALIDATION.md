@@ -1,0 +1,23 @@
+# Local validation — November 6, 2026
+
+| Check | Observed result |
+| --- | --- |
+| Python standard-library unit tests | 14 passed |
+| Offline demonstration | Six explicit declaration/consistency rows |
+| Terraform format/init/validate | Passed, signed AzureRM 4.81.0 |
+| Terraform mocked cases | Three passed; no Azure API calls or apply |
+| Workflow syntax | Actionlint passed; manual workflow not dispatched |
+| Trivy source secret scan | No findings; not infrastructure/dependency clearance |
+| Local browser | Four network cards, six check cards and four shared-service cards |
+| Navigation/mobile | All three tabs and 390px layout passed |
+| Browser isolation | Zero page errors and external requests |
+
+The public wrapper initially had a multi-argument variable formatted as an invalid single-line HCL block. It was corrected before provider initialization; validation and all three mock cases then passed. No live plan/apply or resource read occurred.
+
+Tests reject overlapping/escaped ranges, duplicate/unknown peerings and a one-sided connection assumption. A fictional additional hub-peered spoke does not produce a direct spoke relationship in this deliberately narrow model. Prefixes and production transit flags are compared with the selected copied source.
+
+These are source-declaration checks, not effective-route/NSG evaluation, packet delivery, real DNS resolution, private endpoint approval or identity/data-access tests. The six demonstration rows summarize model declarations and are not six independent live network tests. Other routes and networks can exist outside this curated selection.
+
+Screenshots were captured from the new offline viewer. They do not show Azure Portal or a live inventory. No Azure resources, service starts, SQL access, endpoints, paid tiers or settings changed, and no hosted Actions minutes were consumed.
+
+[Machine-readable result](validation-results.json) records this scope. See [source mapping](SOURCE-MAP.md) for original file hashes and explicit public adaptations.

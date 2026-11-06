@@ -1,0 +1,76 @@
+{
+  "reviewedDate": "2026-11-06",
+  "files": [
+    {
+      "source": "infra/modules/network/main.tf",
+      "sourceSha256": "7685668e57335db6a3e4d0bde1ab81989d618999c777b97067896115b24e0732",
+      "publicFile": "infra/modules/network/main.tf"
+    },
+    {
+      "source": "infra/modules/network/variables.tf",
+      "sourceSha256": "e3ccc841347fb8f9143b95e3b9445e750f8536e9465fa627d6dbedc2d9bd0189",
+      "publicFile": "infra/modules/network/variables.tf"
+    },
+    {
+      "source": "infra/modules/network/outputs.tf",
+      "sourceSha256": "10d55e366cf00c78f89c8e5b3e49ae59e54ce2930ad3594e95de966edfe943cb",
+      "publicFile": "infra/modules/network/outputs.tf"
+    },
+    {
+      "source": "infra/modules/network/versions.tf",
+      "sourceSha256": "b88fcfef92a8571378d3376a6d7e2b7478df1fcaaecfcf56b8ec5e2c831a6118",
+      "publicFile": "infra/modules/network/versions.tf"
+    },
+    {
+      "source": "infra/platform/production/network.tf",
+      "sourceSha256": "e89cb19579146fd6dff310002c816706e53e4fee69bba0984e3729868874c5c8",
+      "publicFile": "infra/modules/foundation/network.tf"
+    },
+    {
+      "source": "infra/platform/production/production-hub-network.tf",
+      "sourceSha256": "8e7f82d5288881219e525c6c62d1cb88c3e0fb2578a352e43609633da7619b93",
+      "publicFile": "infra/modules/foundation/hub.tf"
+    },
+    {
+      "source": "infra/platform/nonproduction/network-module.tf",
+      "sourceSha256": "eb64c7233e874a5a45989c4e6a75cd6926b3e244ab850fcfae9b35f01a308b03",
+      "publicFile": "reference/nonproduction/network.tf"
+    },
+    {
+      "source": "infra/platform/backstage/network.tf",
+      "sourceSha256": "efdd1638900cb85d099d085e15f93a5c42b638228e8632e4d026b4f98729a77b",
+      "publicFile": "reference/shared-services/network.tf"
+    },
+    {
+      "source": "infra/platform/hub/main.tf",
+      "sourceSha256": "bd7814d55e891cf2e1e0fd31f57b8a5efa34388422f1deb2c0e1024d4d5f0b65",
+      "publicFile": "reference/monitoring/operations.tf"
+    },
+    {
+      "source": "infra/platform/hub/security.tf",
+      "sourceSha256": "191e588fe5bcd9d071ce86c66b90ebde580308f7add75c30984dbabeb33937db",
+      "publicFile": "reference/monitoring/security.tf"
+    },
+    {
+      "source": "infra/platform/production/sql.tf",
+      "sourceSha256": "bbd57656c035fe68072b71f61550eae0ba27e233db7255de6b6f1530e759e105",
+      "publicFile": "reference/dns/sql-root.tf"
+    },
+    {
+      "source": "infra/platform/production/document-private-endpoint.tf",
+      "sourceSha256": "d974b9d5ecb4b5e7ea18e4cdfb0bfaa9df49731acae9a26303d72e40a73968fb",
+      "publicFile": "reference/dns/documents.tf"
+    },
+    {
+      "source": "infra/modules/sql/main.tf",
+      "sourceSha256": "0e3b4ee0f9e5a6b075528ddd806d5a830f4f0ab36b7a4edee27ef0c2b57efc9b",
+      "publicFile": "reference/dns/sql-module.tf"
+    }
+  ],
+  "publicAdaptations": [
+    "Example resource labels",
+    "Standalone source-module layout",
+    "Default-Off outer network guard",
+    "Source-derived offline model and viewer"
+  ]
+}
