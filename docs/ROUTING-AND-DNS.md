@@ -4,7 +4,7 @@
 
 ## Direct peering and transit
 
-The source contains two reciprocal production peering resources. Both enable VNet access while leaving forwarded traffic, gateway transit and remote-gateway use false. Peering supplies direct connectivity declarations; it does not automatically create a spoke-to-spoke transit path. Actual flows still depend on routes, NSGs and endpoints. [Microsoft VNet peering overview](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview).
+The source defines a connection in each direction between the production hub and application network. Both allow direct network access, but forwarding and gateway-sharing options stay Off. Connecting two networks to the same hub does not automatically connect them to each other. Actual traffic still depends on routing, network rules and service endpoints. [Microsoft VNet peering overview](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview).
 
 Setting a peering flag alone would not build a functional firewall or gateway path. A future transit design needs the appliance/gateway, permitted forwarding, route tables, return path and any required DNS/identity checks. This project does not simulate those systems.
 
