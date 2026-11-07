@@ -2,7 +2,7 @@
 
 **Separate application networks while keeping shared connections organized.**
 
-[Business problem](#the-business-problem) · [Solution](#the-solution) · [What was built](#what-was-built) · [Proof it works](#proof-it-works) · [Commands](docs/COMMANDS.md)
+[Business problem](#the-business-problem) · [Solution](#the-solution) · [What was built](#what-was-built) · [Proof it works](#proof-it-works) · [Commands](docs/COMMANDS.md) · [Step by step](#step-by-step)
 
 ![Source topology and address plan](docs/images/01-topology.png)
 
@@ -26,6 +26,18 @@ Use a central network, called a hub, and a separate application network, called 
 - Firewall, resolver and gateway subnet reservations do **not** create those services.
 
 The project includes actual selected Terraform with example resource names, plus a small new offline topology viewer and address-policy checks. This is evidence based on the source code, not a fresh Azure inventory or live packet test. [Source mapping](docs/SOURCE-MAP.md).
+
+## Step by Step
+
+A short walkthrough of the process, with technical instructions and evidence limits in the sections below.
+
+1. **Assign a purpose to each network** — Use a central hub for selected shared connectivity and separate networks for application workloads. Give each network a clearly owned address range.
+
+2. **Define the intended connections** — Describe the approved links and service areas in reusable setup code. Reserved space for a future service does not mean that service is deployed.
+
+3. **Check the full access path** — Review routing, name lookup and identity permissions separately. Connecting two networks does not automatically grant access to every service.
+
+4. **Validate before expanding** — The local checks test example address plans and proposed setup settings. A real expansion still needs caller checks, cost review and an agreed operating owner.
 
 ## Architecture
 
