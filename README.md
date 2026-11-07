@@ -140,6 +140,10 @@ The public root has no remote backend, cloud credentials or commissioned input f
 
 Hub-and-spoke centralizes connectivity ownership and reserves expansion capacity, but adds address, routing, DNS and permission coordination. Peering can incur traffic charges; firewalls, gateways and resolvers introduce their own running costs. Scale from measured traffic, regional needs, address growth and operating ownership, not from a diagram alone. [Scaling and tradeoffs](docs/SCALING.md).
 
+## Troubleshooting Lessons
+
+A shared resource’s subscription label did not identify all its consumers. The endpoint cost pause preserved production’s independent DNS and private-access path. [Read the incident, evidence and verification](docs/LESSONS-LEARNED.md).
+
 ## Project Guides
 
 | Guide | Purpose |

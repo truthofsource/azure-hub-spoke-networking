@@ -23,3 +23,9 @@ These are source-declaration checks, not effective-route/NSG evaluation, packet 
 Screenshots were captured from the new offline viewer. They do not show Azure Portal or a live inventory. No Azure resources, service starts, SQL access, endpoints, paid tiers or settings changed, and no hosted Actions minutes were consumed.
 
 [Machine-readable result](validation-results.json) records this scope. See [source mapping](SOURCE-MAP.md) for original file hashes and explicit public adaptations.
+
+## Troubleshooting documentation review — November 7, 2026
+
+Added a README incident summary and a linked historical lessons guide, checking the account against the maintained source records. Documentation checks covered local links, complete incident fields, identifying-information patterns, whitespace and preservation of the existing four-step walkthrough. Shared incidents link to the relevant project details; unresolved causes remain explicit.
+
+This was an editorial update. Application code, tests, Terraform, images, workflow definitions and cloud settings were not changed. Existing functional test counts and screenshots above retain their original scope and dates; no application suite, live scan, paid image request, recovery rehearsal or GitHub Actions run was executed for this documentation pass.
