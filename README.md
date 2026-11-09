@@ -164,6 +164,7 @@ A shared resource’s subscription label did not identify all its consumers. The
 | [Architecture](docs/ARCHITECTURE.md) | Actual topology and limits of what the evidence proves |
 | [Address plan](docs/ADDRESS-PLAN.md) | CIDRs, subnets, reservations and growth |
 | [Shared-service placement](docs/SHARED-SERVICES.md) | Hub versus services VNet/subscription |
+| [Private DNS configuration walkthrough](https://github.com/truthofsource/azure-private-networking/blob/main/docs/DNS-WALKTHROUGH.md) | Service zones, VNet links, endpoint records, read-only checks and troubleshooting in the companion project |
 | [Routing and DNS](docs/ROUTING-AND-DNS.md) | Peering, transit, private resolution and identity |
 | [Operations](docs/OPERATIONS.md) | Caller matrix, troubleshooting and change/rollback procedure |
 | [Commands and ClickOps](docs/COMMANDS.md) | Local validation and read-only inspection examples |

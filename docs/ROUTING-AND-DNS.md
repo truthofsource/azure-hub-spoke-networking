@@ -27,3 +27,11 @@ The offline model stores only the selected SQL-link declaration. It performs no 
 | Recovery environment | Do restore into a separate test environment callers reach only intended recovery services? | Can they restore without gaining broad permanent access? |
 
 Additional storage/vault endpoints remain plans by owner choice. Creating a private endpoint can affect public DNS behavior before every caller is ready, so an “unlinked” preparation alone does not prove zero impact. Do not close public access based solely on a diagram or a successful test from one VM.
+
+## Configure the DNS pieces
+
+The companion [Private DNS walkthrough](https://github.com/truthofsource/azure-private-networking/blob/main/docs/DNS-WALKTHROUGH.md) shows the service zone, caller VNet link and private endpoint zone group separately. It includes the selected Terraform pattern, read-only Azure CLI and DNS queries, portal inspection, expected results and failure diagnosis without creating another project or deploying a resolver.
+
+The November 9 configuration observation found application-VNet-linked zones rather than centralized DNS in the hub subscription. Production retained SQL/Blob records; the nonproduction zones/links remained but had no A records after the November 6 endpoint cost pause. Restoring the affected private paths is a prerequisite to resuming those workloads, not an automatic consequence of restarting compute.
+
+Public applicant/staff CNAME records remain with the external authoritative DNS provider. Azure-provided VNet resolution and Azure Private DNS handle the selected private service names; reserved resolver subnets are not an active Azure DNS Private Resolver. This is a dated configuration read, not a private caller/packet or application-access test.
