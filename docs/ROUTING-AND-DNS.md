@@ -24,7 +24,7 @@ The offline model stores only the selected SQL-link declaration. It performs no 
 | Worker | Does the worker environment use the expected network and DNS? | Are its runtime scopes limited to the right workload? |
 | Hosted CI | Can this runner resolve/reach the target? It is not automatically in a spoke. | Can its federated identity deploy only the reviewed scope? |
 | Operator | Is access through the reviewed management path or a bounded exception? | Does the signed-in identity have the required read/action rights? |
-| Recovery environment | Do restore into a separate test environment callers reach only intended recovery services? | Can they restore without gaining broad permanent access? |
+| Recovery environment | Does the isolated recovery caller reach only the intended recovery services? | Can they restore without gaining broad permanent access? |
 
 Additional storage/vault endpoints remain plans by owner choice. Creating a private endpoint can affect public DNS behavior before every caller is ready, so an “unlinked” preparation alone does not prove zero impact. Do not close public access based solely on a diagram or a successful test from one VM.
 
@@ -35,3 +35,5 @@ The companion [Private DNS walkthrough](https://github.com/truthofsource/azure-p
 The November 9 configuration observation found application-VNet-linked zones rather than centralized DNS in the hub subscription. Production retained SQL/Blob records; the nonproduction zones/links remained but had no A records after the November 6 endpoint cost pause. Restoring the affected private paths is a prerequisite to resuming those workloads, not an automatic consequence of restarting compute.
 
 Public applicant/staff CNAME records remain with the external authoritative DNS provider. Azure-provided VNet resolution and Azure Private DNS handle the selected private service names; reserved resolver subnets are not an active Azure DNS Private Resolver. This is a dated configuration read, not a private caller/packet or application-access test.
+
+The walkthrough also compares zone records with the endpoint’s actual NIC addresses when optional DNS metadata is empty. The effective resolver must be checked at the caller; VNet defaults alone do not exclude process-level overrides.
