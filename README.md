@@ -8,7 +8,11 @@
 
 ## The Business Problem
 
-Production, testing and shared engineering services need clear network boundaries. Adding connections without a plan can create overlapping address ranges or unexpected access. The design also needed room to grow without immediately paying for a firewall, gateway or DNS Resolver service.
+The organization runs a production application, a separate test environment and shared engineering services. As these grow, each new database, worker or internal tool needs an agreed place in the network and a clear owner. Ad hoc connections can create overlapping addresses, unexpected access or dependencies that are difficult to understand during a change.
+
+A test environment also needs room to evolve without putting live employee services at risk. Shared services should be reusable, while their costs and access remain distinguishable from the applications they support. Buying a firewall, gateway or additional DNS service before there is a proven requirement adds ongoing expense.
+
+The business problem was to create an understandable foundation for growth: separate environments, deliberate connections, clear ownership and space for future services without commissioning every optional component immediately.
 
 ## The Solution
 
