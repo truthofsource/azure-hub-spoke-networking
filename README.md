@@ -46,7 +46,7 @@ The recorded nonproduction endpoint cost pause means private paths must be resto
 
 ## Step by Step
 
-Build an independent version with the [reader-operated walkthrough](docs/BUILD-YOUR-OWN.md). It gives prerequisites, working locations, numbered actions, source-derived commands, expected results, verification and cleanup.
+Build an independent version with the [step-by-step build guide](docs/BUILD-YOUR-OWN.md). It gives prerequisites, working locations, numbered actions, source-derived commands, expected results, verification and cleanup.
 
 For this project, your working starting point is [`data/topology.json`](data/topology.json). Expected scope: A topology declaration and mock checks, not demonstrated packet delivery.
 
