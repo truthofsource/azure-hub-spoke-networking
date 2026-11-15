@@ -1,104 +1,192 @@
-# Build your own: Azure Hub-and-Spoke Networking and Shared Services
+# Build your own from scratch: Azure Hub Spoke Networking
 
-This is a step-by-step build guide for an independent learning copy. Follow the numbered steps in order and record your own results. The included local implementation is not a complete deployment of the private business platform; cloud extensions are separate and must use your own authorized resources.
+Your own Azure hub, spoke, client subnet and two peering links, with a documented route/access test.
 
-## What you will create
+Start with a new folder, your own files and your own accounts. The numbered steps below describe the build; no portfolio repository checkout is required. The existing implementation/evidence elsewhere in this repository is a separate reference, not a claim that your new build has already passed.
 
-A topology declaration and mock checks, not demonstrated packet delivery.
+## Prerequisites
 
-## Prerequisites and working locations
+Azure subscription with permission to create a dedicated resource group and networks; Azure CLI; Terraform; a non-overlapping address plan. A VM/Bastion/firewall is additional paid scope, not part of the definition below.
 
-| Location | What you need |
-| --- | --- |
-| Your workstation | Git and the runtime versions documented in [the command guide](COMMANDS.md); use its package/lockfile instructions. |
-| Bash, Linux or WSL terminal | The commands below use Bash syntax. Prepare Python 3.12; use the project's pinned dependency files. |
-| PowerShell alternative | Use the PowerShell forms in the command guide, or run this Bash recipe in WSL; do not paste Bash loops into PowerShell. |
-| Azure or external service | Not needed for default local tests. Any cloud extension requires your own account, target, permissions, budget and acceptance plan. |
+Use Bash on Linux/macOS/WSL for Bash blocks and PowerShell for PowerShell blocks. Select the tool versions supported by the official sources below, record the versions you actually install and retain generated dependency locks. Cloud resources, scanner downloads, logs and external AI calls can create costs; review the stated scope before enabling them.
 
-Read [the existing validation scope](VALIDATION.md) before running anything. A recorded historical test result is not evidence that your new copy has passed.
+## Create your project folder
 
-## Step 1: Create your own workspace
-
-**Where:** your workstation, in a new project folder.
-
-1. Clone the public source below into a new directory; keep the source attribution and included license terms. This creates your local learning copy, not cloud resources.
-2. Record the selected commit and tool versions before editing. If you later publish a fork, review any origin, hash or target bindings rather than disabling guards to make the fork pass.
+Choose a new folder name. These first commands create a blank project; an optional `git init` gives it its own history. Create parent directories in your editor when a later step introduces a nested file.
 
 ```bash
-git clone https://github.com/truthofsource/azure-hub-spoke-networking.git
-cd azure-hub-spoke-networking
-git rev-parse HEAD
-git rev-parse --show-toplevel
-git status --short
+mkdir my-azure-hub-spoke-networking
+cd my-azure-hub-spoke-networking
+git init
 ```
 
-**Expected result:** the project files are present and you can identify the starting source. Continue from this repository root unless a command explicitly changes directory.
+Create `.gitignore` before saving credentials or build outputs:
 
-## Step 2: Prepare dependencies and build the local baseline
+```gitignore
+.venv/
+node_modules/
+.env
+.env.*
+local.settings.json
+credentials.json
+token.json
+*.pem
+*.key
+*.tfstate*
+*.tfplan
+.terraform/
+private*/
+captures/
+backups/
+batch.json
+reports/
+out/
+app-config.local.yaml
+```
 
-**Where:** the same workstation terminal.
+The source/file snippets are a starting implementation you type or paste into the named files. Replace `YOUR_*`, names, regions and addresses only with values from your own lab; do not place real client/employee records in a test project. Keep your terminal in this project root unless a step explicitly changes directory.
 
-1. Follow the runtime instructions and install only the dependencies selected by this project's files. Terraform provider downloads, optional browser downloads and scanner databases are separate prerequisites where the detailed guide identifies them.
-2. Run these source-derived baseline commands one at a time and stop on an unexpected failure. Read any skipped integration cases; a skip is not a successful live check.
+Before a first commit, set your own repository-local author with `git config user.name "YOUR_NAME"` and `git config user.email "YOUR_PUBLIC_COMMIT_EMAIL"`. Review `git status --short` and the staged diff before publishing; ignored local files are not a substitute for reviewing what you upload.
+
+## Step 1 — Draw your address and traffic plan
+
+**Where:** Your editor.
+
+Draw a hub at 10.60.0.0/16 and a spoke at 10.61.0.0/16, changing both if they overlap your existing networks. Write down which client should reach which destination and service port.
+
+**Check before continuing:** The two ranges do not overlap and you have a specific allowed and denied traffic case.
+
+## Step 2 — Create the network definition
+
+**Where:** Your new project folder.
+
+Create main.tf below and substitute your own group name, region and owner tag. Each peering is a separate direction; this example does not add a firewall or make a hub a transit router.
+
+Create **`main.tf`** with the following contents:
+
+```hcl
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 4.0"
+    }
+  }
+}
+provider "azurerm" {
+  features {}
+  subscription_id = var.subscription_id
+}
+variable "subscription_id" {
+  type = string
+}
+resource "azurerm_resource_group" "lab" {
+  name     = "rg-my-network-lab"
+  location = "eastus2"
+  tags     = { environment = "lab", owner = "your-team" }
+}
+resource "azurerm_virtual_network" "hub" {
+  name                = "vnet-my-hub"
+  location            = azurerm_resource_group.lab.location
+  resource_group_name = azurerm_resource_group.lab.name
+  address_space       = ["10.60.0.0/16"]
+}
+resource "azurerm_virtual_network" "spoke" {
+  name                = "vnet-my-spoke"
+  location            = azurerm_resource_group.lab.location
+  resource_group_name = azurerm_resource_group.lab.name
+  address_space       = ["10.61.0.0/16"]
+}
+resource "azurerm_subnet" "client" {
+  name                 = "clients"
+  resource_group_name  = azurerm_resource_group.lab.name
+  virtual_network_name = azurerm_virtual_network.spoke.name
+  address_prefixes     = ["10.61.1.0/24"]
+}
+resource "azurerm_virtual_network_peering" "outbound" {
+  name                      = "hub-to-spoke"
+  resource_group_name       = azurerm_resource_group.lab.name
+  virtual_network_name      = azurerm_virtual_network.hub.name
+  remote_virtual_network_id = azurerm_virtual_network.spoke.id
+}
+resource "azurerm_virtual_network_peering" "return" {
+  name                      = "spoke-to-hub"
+  resource_group_name       = azurerm_resource_group.lab.name
+  virtual_network_name      = azurerm_virtual_network.spoke.name
+  remote_virtual_network_id = azurerm_virtual_network.hub.id
+}
+```
+
+**Check before continuing:** The folder contains a readable definition for both VNets, the subnet and both links.
+
+## Step 3 — Select your Azure target and review the plan
+
+**Where:** Bash / WSL terminal.
+
+Sign in to your own subscription, set TF_VAR_subscription_id to its ID, then initialize, validate and save a plan. Inspect that plan for only your new lab resources before applying it.
 
 ```bash
-python3 -B -m unittest discover -s tests -v
+az login
+az account set --subscription "YOUR_SUBSCRIPTION_ID"
+export TF_VAR_subscription_id="YOUR_SUBSCRIPTION_ID"
+terraform init
+terraform fmt
+terraform validate
+terraform plan -out=network.tfplan
+terraform show network.tfplan
+# After checking the target and costs:
+terraform apply network.tfplan
 ```
 
-**Expected result:** the selected tests finish without unexpected failures, and a demonstration command, where provided, produces fictional local decisions. These commands reproduce the included lab scope; they do not commission the live platform.
+**Check before continuing:** Validation succeeds and the saved plan contains no unrelated replacement/deletion.
 
-## Step 3: Make one project-specific change
+## Step 4 — Inspect both peering directions
 
-**Where:** your editor, in your own local copy.
+**Where:** Azure Portal → Virtual networks → each VNet → Peerings.
 
-1. Start with [`data/topology.json`](../data/topology.json) and the matching test or configuration instructions. Create non-overlapping fictional ranges and then a failing overlap case; do not assume hub transit or DNS inheritance.
-2. Save your new case separately from the original acceptance records, then rerun the affected tests and the baseline. Do not edit recorded scanner results, screenshots or validation counts to manufacture a successful outcome.
+Open the hub and spoke and check that both links reach Connected. Inspect the client subnet and each VNet address range; do not infer working packets from a Connected label.
 
-**Expected result:** you can explain what you changed, why the result changed and which negative case still fails safely. An unexpected failure means investigate the implementation or setup, not remove the failing check.
+**Check before continuing:** Both links exist and their remote network IDs match your intended pair.
 
-## Step 4: Verify behavior and capture your own evidence
+## Step 5 — Prove an actual path
 
-**Where:** the test output, local viewer where supplied, and your private evidence folder.
+**Where:** Your own lab client and destination, if you commission them.
 
-1. If the project supplies a viewer, use its startup command in [the command guide](COMMANDS.md); keep long-running preview servers in a separate terminal. Follow its exact loopback address and stop it with Ctrl+C when finished; for a command-line-only example, inspect its terminal output and generated files instead.
-2. Compare your own output with [the proof and limits](../README.md#proof-it-works), then record source version, command, expected result, observed result and unresolved work. Capture screenshots of your own fictional output rather than presenting the existing screenshots as your execution.
+Create isolated test clients only if you need packet proof, with no general internet administration rule. Test the selected service from the client, then inspect its effective routes and NSG rules; record DNS resolution separately.
 
-**Expected result:** A topology declaration and mock checks, not demonstrated packet delivery. Your evidence must say whether it covers local logic, a real tool run, a hosted service or a human observation.
+**Check before continuing:** You have either real allowed/denied traffic evidence or an explicit declaration-only result, not a fabricated connectivity claim.
 
-### Start the local preview
+## Step 6 — Record evidence and remove the lab
 
-Open a second terminal in the same repository root printed by `git rev-parse --show-toplevel`. Run the command below from that root, after the baseline has passed; it stays running while you use the preview.
+**Where:** Your project folder and Azure Portal.
 
-```bash
-python3 -B scripts/preview.py
-```
+Save your diagram, reviewed plan, peering screenshots and actual test results. Run a destroy plan for this isolated Terraform state and remove only the reviewed lab resources; inventory separately created clients or addresses too.
 
-Open [http://127.0.0.1:8137](http://127.0.0.1:8137). Use the exact hostname shown here; a localhost address and a 127.0.0.1 address are not interchangeable for every project's host checks.
+**Check before continuing:** The cleanup inventory accounts for networks, clients and any retained billable resources.
 
-The command uses the same Python environment as the baseline where Python is required. This guide uses an explicit virtual-environment executable rather than activating it; when following other project examples that say `python`, use that same executable if the project has a `.venv`. In WSL, keep the clone and its virtual environment in the same Linux environment; do not reuse a Windows `.venv`.
+## Verification and your own screenshots
 
-Keep one preview per listening port. Stop your own earlier preview with Ctrl+C before starting another one on that port, or use only a port override documented by the project. If you stop the preview, rerun only its startup command; you do not need to rebuild or redeploy cloud services.
+| Evidence | What to record | Your result |
+| --- | --- | --- |
+| New build | Your own files/resource settings and tool versions | Not yet recorded |
+| Working path | The actual successful request, configuration or recovery result | Not yet recorded |
+| Failure boundary | A meaningful denied, malformed, stale or failed case | Not yet recorded |
+| Recovery / cleanup | What you restored or removed and what remains billed | Not yet recorded |
 
-## Step 5: Plan an independent cloud extension, if needed
+Capture your own architecture/configuration, one working result and one failure/recovery result. Keep tokens, credentials, personal records and private identifiers out of public screenshots. Existing portfolio images are references, not evidence that you performed these steps.
 
-**Where:** your own architecture/configuration files first; a separately authorized lab subscription only later.
+## Troubleshooting order
 
-1. Read the implementation and infrastructure references linked below. Substitute your own names, identities, address ranges and service settings in an isolated environment; a public reference may contain only selected components and is not authority to apply someone else's production state.
-2. List the missing integrations and acceptance checks before deployment: runtime hosting, permissions, network/DNS paths, secrets, source data, notification or provider access as applicable. Keep disabled examples disabled until their specific dependencies, costs and cleanup are understood.
+1. Confirm the named file, working directory and selected tool/interpreter.
+2. Check the exact input and resource/account selected for the failing step.
+3. Separate identity permission, network/DNS reachability and application validation.
+4. Keep the actual error and reconcile an unknown write outcome before repeating it; do not widen access or repeat paid operations blindly.
 
-**Expected result:** a scoped extension plan with owners and explicit acceptance criteria, not a claim that the full service is deployed. No cloud `apply`, scanner targeting, paid operation or provider sign-in is implied by the local recipe.
+The numbered steps describe a build procedure. Local syntax checks, an accepted API request, a completed hosted operation and a human verification are different evidence levels; fill in the verification table with what you actually observed.
 
-- [Architecture](ARCHITECTURE.md)
-- [Operations](OPERATIONS.md)
-- [Validation](VALIDATION.md)
-- [Source Map](SOURCE-MAP.md)
-- [Lessons Learned](LESSONS-LEARNED.md)
+## Official implementation references
 
-## Step 6: Troubleshoot, close out and explain what you built
+- [learn.microsoft.com — virtual-network-peering-overview](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview)
+- [developer.hashicorp.com — plan](https://developer.hashicorp.com/terraform/cli/commands/plan)
 
-**Where:** your project folder and the operating guide for any environment you actually created.
-
-1. Check the failing stage in order: working directory and runtime, dependencies, test input, configuration, then any separately enabled service. Preserve the error and consult the existing troubleshooting lessons before widening permissions or changing the target.
-2. Stop only the viewers/containers you started, retain your useful evidence and remove only resources belonging to your own reviewed lab. A local-only run needs no cloud deletion; if you created cloud resources, verify residual storage/address/monitoring charges rather than assuming compute stop removes all cost.
-
-**Finish checklist:** explain the business problem, show your own change and verification, describe one failure/recovery case, identify limitations and name the next owner action. Keep credentials and business records out of public commits and screenshots.
+The walkthrough layout follows the prerequisites → creation/configuration → test → verification → troubleshooting → cleanup pattern of the [Splunk project reference](https://github.com/davidharris6/splunk-siem-log-analysis). Its Splunk-specific settings are not copied into unrelated projects.
