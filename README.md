@@ -46,6 +46,19 @@ The recorded nonproduction endpoint cost pause means private paths must be resto
 
 ## Step by Step
 
+Build an independent version with the [reader-operated walkthrough](docs/BUILD-YOUR-OWN.md). It gives prerequisites, working locations, numbered actions, source-derived commands, expected results, verification and cleanup.
+
+For this project, your working starting point is [`data/topology.json`](data/topology.json). Expected scope: A topology declaration and mock checks, not demonstrated packet delivery.
+
+1. **Create your own workspace.** Copy the project and record the source version before editing.
+2. **Prepare and run the baseline.** Use the documented runtimes and selected dependencies, then run the local checks.
+3. **Make your own change.** Edit a project-specific fixture, configuration or rule and rerun its positive and negative cases.
+4. **Verify and document your result.** Capture your own evidence and distinguish a local example from a live integration.
+5. **Extend and close out deliberately.** Plan any independent cloud work separately and clean up only what you created.
+
+<details>
+<summary>How the underlying platform process works</summary>
+
 A short walkthrough of the process, with technical instructions and evidence limits in the sections below.
 
 1. **Assign a purpose to each network** — Use a central hub for selected shared connectivity and separate networks for application workloads. Give each network a clearly owned address range.
@@ -55,6 +68,8 @@ A short walkthrough of the process, with technical instructions and evidence lim
 3. **Check the full access path (Private DNS, routes and roles)** — Review routing, name lookup and identity permissions separately. Connecting two networks does not automatically grant access to every service.
 
 4. **Validate before expanding** — The local checks test example address plans and proposed setup settings. A real expansion still needs caller checks, cost review and an agreed operating owner.
+
+</details>
 
 ## Architecture
 
