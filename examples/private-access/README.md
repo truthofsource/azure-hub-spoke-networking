@@ -27,7 +27,7 @@ Separate application and private-service network areas. Check the connection pat
 - Operated a protected SQL path with separately controlled, time-limited inspection procedures and explicit restoration checks.
 - Reviewed storage/vault private-path proposals against actual deployment callers, DNS resolution and cost; did not present every proposed private endpoint as deployed.
 
-This case study draws on a workforce/operations platform I designed and implemented. Organization details and records are excluded. The public code makes selected patterns reproducible; the screenshots show a working local demonstration with fictional data. [Validation scope](docs/VALIDATION.md) separates that evidence from testing against the actual cloud service.
+This case study draws on a workforce/operations platform I designed and implemented. Organization details and records are excluded. The public code makes selected patterns reproducible; the local demonstration uses fictional data, and its placeholder screenshots have been removed. [Validation scope](docs/VALIDATION.md) separates that evidence from testing against the actual cloud service.
 
 ## Tools Used and What They Do
 
@@ -257,7 +257,7 @@ terraform -chdir=infra test -filter=tests/foundation.tftest.hcl
 
 ### 4. Visible results
 
-The dashboard runs the same domain code as the CLI. Desktop/mobile rendering, all three tabs, rerunning the demonstration, cross-origin write rejection and unlisted-file rejection were checked. The screenshots are captured from those runs.
+The dashboard runs the same domain code as the CLI. Desktop/mobile rendering, all three tabs, rerunning the demonstration, cross-origin write rejection and unlisted-file rejection were checked. Those local test results remain documented; proper application screenshots are deferred.
 
 Expected access denials are successful negative tests. Cloud permissions, network connectivity and provider integrations need their own acceptance evidence.
 

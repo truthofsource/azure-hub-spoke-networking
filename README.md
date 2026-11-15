@@ -311,7 +311,7 @@ terraform -chdir=infra test
 python -B scripts/preview.py
 ```
 
-Open [the local reference viewer](http://127.0.0.1:8137). Switch between Network topology, Boundary checks and Shared services. The browser screenshots show this local reference, not Azure Portal. Ctrl+C stops it. [Dated validation](docs/VALIDATION.md).
+Open [the local reference viewer](http://127.0.0.1:8137). Switch between Network topology, Boundary checks and Shared services. Proper Azure screenshots are deferred; this remains a runnable local reference. Ctrl+C stops it. [Dated validation](docs/VALIDATION.md).
 
 ## Where Shared Services Belong
 
