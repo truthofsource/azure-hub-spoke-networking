@@ -13,17 +13,16 @@ A browser-based operations platform needed reachable sign-in and application pag
 
 ## Processing path
 
-```mermaid
-flowchart TD
-  Internet --> Portal[Public application and identity]
-  Hub[Shared-services hub] <-->|VNet peering| Spoke[Workload spoke]
-  Portal --> App[Application integration subnet]
-  Spoke --> App
-  App -->|HTTPS and identity| PE[Optional private endpoint]
-  DNS[Private DNS zone and VNet link] --> PE
-  PE --> Store[Existing private data service]
-  Runner[Reviewed deployment caller] -.-> Hub
-```
+1. **Internet** → **Public application and identity**.
+2. Shared-services hub exchanges information with Workload spoke (VNet peering).
+3. **Public application and identity** → **Application integration subnet**.
+4. **Workload spoke** → **Application integration subnet**.
+5. **Application integration subnet** → **Optional private endpoint (HTTPS and identity)**.
+6. **Private DNS zone and VNet link** → **Optional private endpoint**.
+7. **Optional private endpoint** → **Existing private data service**.
+8. Reviewed deployment caller has a conditional/reference connection to Shared-services hub.
+
+[View the illustrated project overview](../../../docs/diagrams/architecture.svg).
 
 ## Portable reference boundary
 

@@ -1,5 +1,7 @@
 # Local validation — November 6, 2026
 
+> Placeholder screenshots were removed on November 15, 2026. Written test results below retain their original dates and scope; historical screenshot references describe earlier captures. Proper Azure and application screenshots are deferred. The illustrated architecture is a source-based explanation, not a live-service screenshot.
+
 **Terms used here:** A private endpoint gives a supported service an address on a private network; access permissions still apply. DNS turns a service name into the network address used to reach it.
 
 | Check | Observed result |

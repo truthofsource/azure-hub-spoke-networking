@@ -37,34 +37,24 @@ The linked zones had VM autoregistration disabled. Endpoint records are managed 
 
 ## Follow the two paths
 
-```mermaid
-sequenceDiagram
-    participant Browser
-    participant Recursive as Client recursive resolver
-    participant PublicDNS as External authoritative DNS
-    participant Web as Azure Static Web Apps
-    Browser->>Recursive: Resolve applicant or staff hostname
-    Recursive->>PublicDNS: Ask for the public record on a cache miss
-    PublicDNS-->>Recursive: CNAME pointing to the Azure web hostname
-    Note over Recursive: Follows the Azure DNS chain to address records
-    Recursive-->>Browser: Return destination addresses
-    Browser->>Web: HTTPS using the original custom hostname
-```
+1. Browser → Client recursive resolver: Resolve applicant or staff hostname.
+2. Client recursive resolver → External authoritative DNS: Ask for the public record on a cache miss.
+3. External authoritative DNS → Client recursive resolver: CNAME pointing to the Azure web hostname.
+4. Follows the Azure DNS chain to address records.
+5. Client recursive resolver → Browser: Return destination addresses.
+6. Browser → Azure Static Web Apps: HTTPS using the original custom hostname.
 
-```mermaid
-sequenceDiagram
-    participant App as Caller in linked VNet
-    participant Resolver as Azure-provided DNS
-    participant Zone as Linked private DNS zone
-    participant Service as Private endpoint and service
-    App->>Resolver: Resolve normal service hostname
-    Resolver->>Zone: Resolve private-link name
-    Zone-->>Resolver: Private A-record address
-    Resolver-->>App: DNS answer
-    App->>Service: Connect with normal hostname and approved identity
-```
+[View the illustrated project overview](../../../docs/diagrams/architecture.svg).
 
-The diagrams describe logical successful resolution paths, not fresh packet captures or a separate network request for every drawn private-zone step. A browser normally asks its configured recursive resolver, which follows the authoritative public records and returns the address; the authoritative website DNS provider is not an application proxy. Keep the normal SQL/storage service hostname in the application rather than replacing it with an IP address; this preserves the intended service/TLS name. See Microsoft’s [private endpoint DNS guidance](https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-dns).
+1. Caller in linked VNet → Azure-provided DNS: Resolve normal service hostname.
+2. Azure-provided DNS → Linked private DNS zone: Resolve private-link name.
+3. Linked private DNS zone → Azure-provided DNS: Private A-record address.
+4. Azure-provided DNS → Caller in linked VNet: DNS answer.
+5. Caller in linked VNet → Private endpoint and service: Connect with normal hostname and approved identity.
+
+[View the illustrated project overview](../../../docs/diagrams/architecture.svg).
+
+These sequences describe logical successful resolution paths, not fresh packet captures or a separate network request for every drawn private-zone step. A browser normally asks its configured recursive resolver, which follows the authoritative public records and returns the address; the authoritative website DNS provider is not an application proxy. Keep the normal SQL/storage service hostname in the application rather than replacing it with an IP address; this preserves the intended service/TLS name. See Microsoft’s [private endpoint DNS guidance](https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-dns).
 
 ## Four-step walkthrough
 

@@ -1,5 +1,7 @@
 # Validation evidence and scope
 
+> Placeholder screenshots were removed on November 15, 2026. Written test results below retain their original dates and scope; historical screenshot references describe earlier captures. Proper Azure and application screenshots are deferred. The illustrated architecture is a source-based explanation, not a live-service screenshot.
+
 ## Executed for this public reference
 
 - **11 unit tests passed**, including positive and negative paths.

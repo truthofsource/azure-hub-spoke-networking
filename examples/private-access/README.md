@@ -6,8 +6,6 @@
 
 [The problem](#the-business-problem) · [The solution](#the-solution) · [What was built](#what-was-built) · [Proof it works](#proof-it-works) · [Run it](#run-it-locally) · [Step by step](#step-by-step)
 
-![Overview of the working demonstration](docs/images/01-overview.png)
-
 ## The Business Problem
 
 Staff and applicants need reliable access to the website, while employee documents and the database need tighter protection. The same backend services must also be reachable by deployment tools, file processors and recovery procedures. Each of those callers may take a different network path.
@@ -158,7 +156,7 @@ Check that the unapproved public client cannot read the private container, witho
 | Failure boundary | A meaningful denied, malformed, stale or failed case | Not yet recorded |
 | Recovery / cleanup | What you restored or removed and what remains billed | Not yet recorded |
 
-Capture your own architecture/configuration, one working result and one failure/recovery result. Keep tokens, credentials, personal records and private identifiers out of public screenshots. Existing portfolio images are references, not evidence that you performed these steps.
+Capture your own architecture/configuration, one working result and one failure/recovery result. Keep tokens, credentials, personal records and private identifiers out of public screenshots. The architecture diagram explains the design; record your own results rather than treating it as execution evidence.
 
 ### Troubleshooting order
 
@@ -193,17 +191,16 @@ A short walkthrough of the process, with technical instructions and evidence lim
 
 ## Architecture
 
-```mermaid
-flowchart LR
-  Internet --> Portal[Public application and identity]
-  Hub[Shared-services hub] <-->|VNet peering| Spoke[Workload spoke]
-  Portal --> App[Application integration subnet]
-  Spoke --> App
-  App -->|HTTPS and identity| PE[Optional private endpoint]
-  DNS[Private DNS zone and VNet link] --> PE
-  PE --> Store[Existing private data service]
-  Runner[Reviewed deployment caller] -.-> Hub
-```
+1. **Internet** → **Public application and identity**.
+2. Shared-services hub exchanges information with Workload spoke (VNet peering).
+3. **Public application and identity** → **Application integration subnet**.
+4. **Workload spoke** → **Application integration subnet**.
+5. **Application integration subnet** → **Optional private endpoint (HTTPS and identity)**.
+6. **Private DNS zone and VNet link** → **Optional private endpoint**.
+7. **Optional private endpoint** → **Existing private data service**.
+8. Reviewed deployment caller has a conditional/reference connection to Shared-services hub.
+
+[View the illustrated project overview](../../docs/diagrams/architecture.svg).
 
 ## What Was Built
 
@@ -261,8 +258,6 @@ terraform -chdir=infra test -filter=tests/foundation.tftest.hcl
 ### 4. Visible results
 
 The dashboard runs the same domain code as the CLI. Desktop/mobile rendering, all three tabs, rerunning the demonstration, cross-origin write rejection and unlisted-file rejection were checked. The screenshots are captured from those runs.
-
-![Positive and negative checks from the running demonstration](docs/images/02-validation.png)
 
 Expected access denials are successful negative tests. Cloud permissions, network connectivity and provider integrations need their own acceptance evidence.
 

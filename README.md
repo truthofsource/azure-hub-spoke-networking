@@ -1,10 +1,12 @@
 # Azure Hub-and-Spoke Networking and Shared Services
 
+[![Hub-and-spoke networking — illustrated overview](docs/diagrams/architecture.png)](docs/diagrams/architecture.svg)
+
+[View SVG](docs/diagrams/architecture.svg) · [Download PNG](docs/diagrams/architecture.png) · [Edit in draw.io](docs/diagrams/architecture.drawio)
+
 **Separate application networks while keeping shared connections organized.**
 
 [Business problem](#the-business-problem) · [Solution](#the-solution) · [What was built](#what-was-built) · [Proof it works](#proof-it-works) · [Commands](docs/COMMANDS.md) · [Step by step](#step-by-step)
-
-![Source topology and address plan](docs/images/01-topology.png)
 
 ## The Business Problem
 
@@ -221,7 +223,7 @@ Save your diagram, reviewed plan, peering screenshots and actual test results. R
 | Failure boundary | A meaningful denied, malformed, stale or failed case | Not yet recorded |
 | Recovery / cleanup | What you restored or removed and what remains billed | Not yet recorded |
 
-Capture your own architecture/configuration, one working result and one failure/recovery result. Keep tokens, credentials, personal records and private identifiers out of public screenshots. Existing portfolio images are references, not evidence that you performed these steps.
+Capture your own architecture/configuration, one working result and one failure/recovery result. Keep tokens, credentials, personal records and private identifiers out of public screenshots. The architecture diagram explains the design; record your own results rather than treating it as execution evidence.
 
 ### Troubleshooting order
 
@@ -256,26 +258,7 @@ A short walkthrough of the process, with technical instructions and evidence lim
 
 ## Architecture
 
-```mermaid
-flowchart LR
-  Hub[Production connectivity hub
-10.30.0.0/16] <-->|Reciprocal peering
-transit controls Off| Spoke[Production application spoke
-10.40.0.0/16]
-  Hub --> Reserved[Reserved subnets
-Firewall / Resolver / Gateway
-services deferred]
-  Spoke --> App[Functions integration subnet]
-  Spoke --> Endpoint[Workload endpoint subnet]
-  App -->|Existing private data path| Data[SQL / document services]
-  DNS[Explicit private DNS zone / VNet links] --> App
-  NP[Separate nonproduction network
-10.20.0.0/16]
-  Eng[Separate engineering-services VNet
-10.50.0.0/20]
-  Shared[Shared resource ownership
-registry / operational workspace / security workspace]
-```
+[View the illustrated project overview](docs/diagrams/architecture.svg).
 
 The isolated boxes are deliberate: the selected source does not prove a route from every network to every other network. Shared workspaces and registry ownership do not place those managed services inside a hub subnet. [Architecture detail](docs/ARCHITECTURE.md).
 
@@ -308,8 +291,6 @@ python -B -m lab.topology
 ### 2. Do not assume hub transit or DNS inheritance
 
 The model checks that reciprocal production peering is defined. A fictional second spoke peered with the hub does not become directly peered with the first spoke. The SQL DNS reference links the client VNet explicitly; peering does not copy the link to the hub.
-
-![Offline boundary checks](docs/images/02-checks.png)
 
 These declaration checks are not a route-engine simulation. They do not evaluate NSGs, effective routes, service firewalls, endpoint state or application authorization. [Routing and access](docs/ROUTING-AND-DNS.md).
 
