@@ -1,0 +1,63 @@
+# Validation evidence and scope
+
+## Executed for this public reference
+
+- **11 unit tests passed**, including positive and negative paths.
+- **6 demonstration checks passed** through the actual domain code.
+- Desktop and 390-pixel mobile pages rendered without browser errors or horizontal page overflow.
+- The Run demonstration action, three tabs, cross-origin write rejection and unlisted-asset rejection were exercised.
+- Manual-only GitHub workflow passed actionlint 1.7.12. No hosted Actions run was consumed for this preparation.
+- Trivy 0.75.0 source secret scan: zero findings across the five staged repositories, excluding the Terraform provider cache. This does not prove that arbitrary later additions are secret-free.
+- Terraform formatting, provider-schema validation and two mock-provider plan tests passed. No Azure resource was created.
+
+See [the machine-readable record](validation-results.json) for date, commands' result counts and domain-source hashes.
+
+## Evidence classification
+
+| Evidence | What it establishes | What it does not establish |
+| --- | --- | --- |
+| Source-platform narrative | The reusable architecture and operating decisions behind the project | Public access to private records or a copy of the production environment |
+| Unit and concurrency tests | Behavior of these exact portable reference modules | Provider permission correctness or distributed multi-region behavior |
+| Local screenshots | The running dashboard and real code output with fictional records | A cloud deployment or live Azure/AWS acceptance |
+| Scanner source check | No findings from that tool in that selected input | A whole-estate penetration test or vulnerability-free containers |
+| Cloud examples | Reviewable configuration/design patterns | Commissioned resources, paid API calls or actual IAM grants |
+
+## Reproduce
+
+```bash
+python -B -m unittest discover -s tests -v
+python -B -m lab demo
+python -B -m lab serve --port 8011
+```
+
+The successful screenshots were generated from these local demonstrations; they are not hand-edited success states. The Windows recovery test initially exposed unclosed SQLite handles; explicit connection closure fixed the cleanup failure. Concurrent identity/scan journal tests verify duplicate requests through separate worker connections where relevant.
+
+## Deliberate limits
+
+The public reference does not use real employee records, make paid AI calls, send email/SMS, mutate Microsoft Graph or apply cloud infrastructure. Local filesystem and SQLite tests do not replace provider-specific failure/recovery tests. Real implementation history is described as context and kept separate from reproducible evidence in this repository.
+
+## Troubleshooting documentation review — November 7, 2026
+
+Added a README incident summary and a linked historical lessons guide, checking the account against the maintained source records. Documentation checks covered local links, complete incident fields, identifying-information patterns, whitespace and preservation of the existing four-step walkthrough. Shared incidents link to the relevant project details; unresolved causes remain explicit.
+
+This was an editorial update. Application code, tests, Terraform, images, workflow definitions and cloud settings were not changed. Existing functional test counts and screenshots above retain their original scope and dates; no application suite, live scan, paid image request, recovery rehearsal or GitHub Actions run was executed for this documentation pass.
+
+## Tools and utilities documentation review — November 7, 2026
+
+Added a prominent README table naming the relevant tools/services and their jobs. The wording distinguishes actual platform components, operating utilities, selected source adapters, optional preparation and local teaching examples. Relevant step headings name their tools while the four-step order and explanatory sentences remain unchanged.
+
+This editorial pass did not change application code, dependencies, infrastructure, workflows or cloud settings. Existing tests and screenshots retain their original evidence scope; no application suite, live scanner, browser sign-in, paid request or GitHub Actions run was executed for this wording update.
+
+## DNS walkthrough documentation — November 9, 2026
+
+Added or linked the private DNS configuration walkthrough, checked against the maintained Terraform pattern and Microsoft’s DNS documentation. A read-only platform inventory verified public delegation/CNAMEs, zone inventory, VNet DNS settings, links and A-record counts; public examples omit organization/resource identifiers and private IPs.
+
+This addition changes documentation only. It does not apply Terraform, edit DNS, create endpoints/resolvers, start nonproduction, test an integrated private caller or dispatch GitHub Actions; existing functional test counts and screenshots retain their original scope.
+
+Documentation checks passed for both repositories: local links, balanced code fences, whitespace, unchanged original four-step walkthroughs and manual-only workflow triggers. The private-networking guide?s two HCL excerpts passed terraform fmt -check, and its three Bash blocks passed bash -n; the inspection examples were not executed against their fictional targets.
+
+## DNS walkthrough second review — November 9, 2026
+
+Clarified the public recursive/authoritative resolution sequence and the difference between optional endpoint DNS metadata and actual NIC addresses. Added a guarded read-only NIC inspection example, link-state output, caller-level resolver caveats and companion wording corrections. Azure CLI help was inspected using a separate temporary configuration directory; no account or cloud resource was changed.
+
+The original dated inventory remains the evidence source; this review did not perform a new Azure inventory, private caller test or deployment. Functional test counts and screenshots remain unchanged.

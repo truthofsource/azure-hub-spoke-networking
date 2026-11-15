@@ -1,0 +1,164 @@
+{
+  "source_repository": "azure-private-networking",
+  "source_commit": "8631a602f416ca2e62c09fa4c8afdc33feb939cb",
+  "destination": "azure-hub-spoke-networking",
+  "copied_files": [
+    {
+      "path": ".gitattributes",
+      "sha256": "84a5ff4d6005f5f7dceb0d075394fbb899a8bf62f8546850c9da1d4825d7a5d7"
+    },
+    {
+      "path": ".github/workflows/validate.yml",
+      "sha256": "0631415c833646e08d09a7299757f311c4eae80097882202ff0b7ee6414d0964"
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "f416274a96683c852acf291718b136042ddc7c44a44737cd09cf2883b8b88652"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "1671e11d0985edd660b3f6c623c37205372ee71f860aed66beb74d766bd96f70"
+    },
+    {
+      "path": "README.md",
+      "sha256": "42a46c76a7a1e2bcf5e195fa85114051e9917cf0130502f784cc8a0ab034dfe5"
+    },
+    {
+      "path": "SECURITY.md",
+      "sha256": "13743379c35a938e200e41260efc12561759e86bb0e28dbd0b6d6bfdf267e282"
+    },
+    {
+      "path": "docs/ARCHITECTURE.md",
+      "sha256": "ac400372e3a5defd67ba1fd2834c9fc428ca3c7b588c8b1b8ec46c17e0f283d6"
+    },
+    {
+      "path": "docs/BUILD-YOUR-OWN.md",
+      "sha256": "8ad57492af6283e8e1ff82832174708b4f4dd30b3ee7ad4aaec312cf94f6a5f1"
+    },
+    {
+      "path": "docs/COMMANDS.md",
+      "sha256": "2c03fe03f9cb98a1966cffadf31f19d3013623f46f878d6b9f7e2879831dbcca"
+    },
+    {
+      "path": "docs/DNS-WALKTHROUGH.md",
+      "sha256": "f8ee7a05bc898dcee49ec45f578986fc17ce28ab68d6ea0c06c9b394ad9b7061"
+    },
+    {
+      "path": "docs/LESSONS-LEARNED.md",
+      "sha256": "1f829ac7f81cc93b3c95079b282d6c475b33e648fb25b05d4fd9a92d5a50bc40"
+    },
+    {
+      "path": "docs/OPERATIONS.md",
+      "sha256": "8449a1961f72d965f6b201a2e38332b030442d25e756bb741f73462a4ca43e9c"
+    },
+    {
+      "path": "docs/REFERENCES.md",
+      "sha256": "e0e14859c359aa05f25a5c76ae86ffcca20db8dce9d194805f68db84573babbd"
+    },
+    {
+      "path": "docs/SCALING.md",
+      "sha256": "f603a5ff69b05fb06cc7231ddf7260813eba79a404d07af3f37e34221b62c9f1"
+    },
+    {
+      "path": "docs/VALIDATION.md",
+      "sha256": "f42479622b1cebe306685776092c57fbbfc7d9337c47fa46242c053240c3daaa"
+    },
+    {
+      "path": "docs/WALKTHROUGH.md",
+      "sha256": "ebe842b7bf44888fc35ec94aa7e08a6848b09a3e57422279a0edf3fab6ec8c3c"
+    },
+    {
+      "path": "docs/images/01-overview.png",
+      "sha256": "170c7f8d64240d467c10ee597b0ddb4c251cdfd8f0ef7b45b9a56dcf120da0c9"
+    },
+    {
+      "path": "docs/images/02-validation.png",
+      "sha256": "10aef64e1dc4b3b1227495e1deb686fc0418e2a01502ca0e76684420ca400e64"
+    },
+    {
+      "path": "docs/images/03-mobile.png",
+      "sha256": "0c2d3b7b901b455f47e24cba6a19cc74f028bab293cfb4cec61119f7b4ab4e89"
+    },
+    {
+      "path": "docs/validation-results.json",
+      "sha256": "2cca9458b027450ddde7e3a174df2a72a5e548a4aed179fbe1b5f819350a9962"
+    },
+    {
+      "path": "infra/.terraform.lock.hcl",
+      "sha256": "9e01a97ef10c53f2e2a04776919489a1a7059d5352c6d2566c640ec1408b5dd1"
+    },
+    {
+      "path": "infra/README.md",
+      "sha256": "085df238faf8f68eed8a3fbe19df84aa4f4e1e2e21f83e5f7dcfeab1a2e88630"
+    },
+    {
+      "path": "infra/example.tfvars.example",
+      "sha256": "9c1b5ad9062e5b2c737115dc0119711468fccca13db68eef6fa1df0d4505f3e5"
+    },
+    {
+      "path": "infra/main.tf",
+      "sha256": "4b7c73e0793a46ab1c4b708fa4ca6c79a8b3b8e0ff9323050ff0238ff334db94"
+    },
+    {
+      "path": "infra/tests/foundation.tftest.hcl",
+      "sha256": "48d858bb9d765283f6e08533ef663db7c8a088b093aff4ecbbded920839c5eb0"
+    },
+    {
+      "path": "infra/variables.tf",
+      "sha256": "e016e8a8cd540f08f4f8f1c3d697537aa5e89dbba7455b73258ae1d0d70911e4"
+    },
+    {
+      "path": "infra/versions.tf",
+      "sha256": "6e550ec7ccec677a54c34172297a3cd424be9e4f438634a27c9f4e8324959591"
+    },
+    {
+      "path": "lab/__init__.py",
+      "sha256": "95a8296d613b692bb13af925e90204c901108a2c30dfd3ffd4d0fadca55cb5f9"
+    },
+    {
+      "path": "lab/__main__.py",
+      "sha256": "d528e758b251fa9f3bf42a326d8644a7055bcd1884112579e88981f33dcbba13"
+    },
+    {
+      "path": "lab/demo.py",
+      "sha256": "1ee90686323e9ae6b91bddf1dd303e8c90c5121078f1e27634479fd3381d82bb"
+    },
+    {
+      "path": "lab/domain.py",
+      "sha256": "072a7275030bb97a18b8501189543b46b4b345eaed35747ffe3a22ba11da0319"
+    },
+    {
+      "path": "lab/project.json",
+      "sha256": "b8c26b6d65cf24ba2fbf3c7f1daaa040103f442c18398dcf704ce3e0fab702dc"
+    },
+    {
+      "path": "lab/web/app.js",
+      "sha256": "9ec0cd0243a7ef57de9bbc9433a2929a59d553fbcd24eb800c82eed1e3eacb83"
+    },
+    {
+      "path": "lab/web/index.html",
+      "sha256": "47addf14562fe5425bbb5bf82a8e1638c479dcda35bd572a39e9be7c200894ec"
+    },
+    {
+      "path": "lab/web/style.css",
+      "sha256": "96088c1d4d75dbe0d0c5a0d3d214ce19dbff4d9a7956f47071885b10cf40fd12"
+    },
+    {
+      "path": "lab/workbench.py",
+      "sha256": "cc2889350fd182e10a74b1153e2c96ef93d5c295724f0ae281d757d1a2e546b5"
+    },
+    {
+      "path": "requirements.txt",
+      "sha256": "b1e521c164fe482d939b2ccfd8c71fe5bd135822aab4e4e3f8015a44898fa640"
+    },
+    {
+      "path": "tests/test_demo.py",
+      "sha256": "899f16f01189add1d88283cb779d2059f8c3f1e00004b0624354c7aa1a93a9d6"
+    },
+    {
+      "path": "tests/test_domain.py",
+      "sha256": "b9abb5dcc2f05e6f6d450513b1381ba16ad359756339fabb6ed2bfb1d1512a75"
+    }
+  ],
+  "note": "Source snapshot retained; internal links and location guidance updated separately."
+}

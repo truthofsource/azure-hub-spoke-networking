@@ -30,7 +30,7 @@ Additional storage/vault endpoints remain plans by owner choice. Creating a priv
 
 ## Configure the DNS pieces
 
-The companion [Private DNS walkthrough](https://github.com/truthofsource/azure-private-networking/blob/main/docs/DNS-WALKTHROUGH.md) shows the service zone, caller VNet link and private endpoint zone group separately. It includes the selected Terraform pattern, read-only Azure CLI and DNS queries, portal inspection, expected results and failure diagnosis without creating another project or deploying a resolver.
+The companion [Private DNS walkthrough](https://github.com/truthofsource/azure-hub-spoke-networking/blob/main/examples/private-access/docs/DNS-WALKTHROUGH.md) shows the service zone, caller VNet link and private endpoint zone group separately. It includes the selected Terraform pattern, read-only Azure CLI and DNS queries, portal inspection, expected results and failure diagnosis without creating another project or deploying a resolver.
 
 The November 9 configuration observation found application-VNet-linked zones rather than centralized DNS in the hub subscription. Production retained SQL/Blob records; the nonproduction zones/links remained but had no A records after the November 6 endpoint cost pause. Restoring the affected private paths is a prerequisite to resuming those workloads, not an automatic consequence of restarting compute.
 

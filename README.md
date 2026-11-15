@@ -366,7 +366,7 @@ A shared resource’s subscription label did not identify all its consumers. The
 | [Architecture](docs/ARCHITECTURE.md) | Actual topology and limits of what the evidence proves |
 | [Address plan](docs/ADDRESS-PLAN.md) | CIDRs, subnets, reservations and growth |
 | [Shared-service placement](docs/SHARED-SERVICES.md) | Hub versus services VNet/subscription |
-| [Private DNS configuration walkthrough](https://github.com/truthofsource/azure-private-networking/blob/main/docs/DNS-WALKTHROUGH.md) | Service zones, VNet links, endpoint records, read-only checks and troubleshooting in the companion project |
+| [Private DNS configuration walkthrough](https://github.com/truthofsource/azure-hub-spoke-networking/blob/main/examples/private-access/docs/DNS-WALKTHROUGH.md) | Service zones, VNet links, endpoint records, read-only checks and troubleshooting in the companion project |
 | [Routing and DNS](docs/ROUTING-AND-DNS.md) | Peering, transit, private resolution and identity |
 | [Operations](docs/OPERATIONS.md) | Caller matrix, troubleshooting and change/rollback procedure |
 | [Commands and ClickOps](docs/COMMANDS.md) | Local validation and read-only inspection examples |
@@ -375,4 +375,12 @@ A shared resource’s subscription label did not identify all its consumers. The
 | [Validation](docs/VALIDATION.md) | Local proof and remaining hosted boundaries |
 | [Terraform](infra/README.md) | Module layout and activation guard |
 
-Related: [Private application/data networking](https://github.com/truthofsource/azure-private-networking) focuses on caller/DNS/access policy; [Backstage hosting](https://github.com/truthofsource/azure-backstage-developer-portal) covers the engineering service running on its selected VM profile.
+Related: [Private application/data networking](https://github.com/truthofsource/azure-hub-spoke-networking/tree/main/examples/private-access) focuses on caller/DNS/access policy; [Backstage hosting](https://github.com/truthofsource/azure-backstage-developer-portal) covers the engineering service running on its selected VM profile.
+
+## Consolidated Examples
+
+These related implementations are now maintained here:
+
+- [azure-private-networking](examples/private-access/README.md)
+
+See [the consolidation guide](docs/CONSOLIDATION.md) for component scope, preserved tests and historical evidence.
