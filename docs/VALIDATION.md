@@ -51,3 +51,18 @@ Documentation checks passed for both repositories: local links, balanced code fe
 Clarified the public recursive/authoritative resolution sequence and the difference between optional endpoint DNS metadata and actual NIC addresses. Added a guarded read-only NIC inspection example, link-state output, caller-level resolver caveats and companion wording corrections. Azure CLI help was inspected using a separate temporary configuration directory; no account or cloud resource was changed.
 
 The original dated inventory remains the evidence source; this review did not perform a new Azure inventory, private caller test or deployment. Functional test counts and screenshots remain unchanged.
+
+## Current architecture publication - November 16, 2026
+
+The primary PNG, SVG and draw.io were replaced with the reviewed current
+Hub-subscription placement. Model containment, label bounds, editable parent/edge
+references and PNG rendering were checked before publication; the PNG was
+visually reviewed. Icons, physical node positions and the actual peering edge
+were preserved. README, architecture, placement and source-map notes now agree.
+
+The same 14 offline topology tests and six-row demonstration passed again. Local
+Markdown destinations, diagram XML, private-identifier guards and whitespace
+checks passed. No Terraform source, source snapshot, cloud resource, service
+power state, paid network service or message changed. The existing workflow is
+manual-only and was not dispatched. These checks do not prove live packet flow
+or every caller's private path; earlier cloud acceptance retains its stated date.

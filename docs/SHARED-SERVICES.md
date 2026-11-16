@@ -6,6 +6,12 @@ Treat three questions separately: who owns a resource, which network it uses, an
 
 ## Connectivity hub
 
+The November 16 move put the existing Central US connectivity VNet in the Hub
+subscription. The application spoke remains production-owned, and the engineering
+VNet remains separate. Subscription ownership does not create transit or put
+every shared service inside the central VNet. The [current diagram and boundaries](ARCHITECTURE.md)
+show this separation.
+
 Place shared transit/network services under connectivity ownership: gateway, inspected egress, resolver or management access when justified. Dedicated subnets preserve service requirements. The selected implementation reserves capacity but leaves Firewall, gateway and Private DNS Resolver services deferred. There is no claim of inspected egress or central spoke transit today.
 
 ## Shared-service boundary

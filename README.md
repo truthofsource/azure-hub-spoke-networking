@@ -10,8 +10,10 @@
 
 > **Placement update - November 16, 2026:** the existing connectivity hub VNet
 > has moved into the Hub subscription; the application spoke remains in production.
-> Both peerings are Connected. The approved diagram and public source excerpts
-> below retain the pre-move placement as a teaching reference. See the
+> Both peerings are Connected. The diagram now shows this current ownership:
+> both blue boxes share the production subscription; the purple Hub boundary
+> contains the central VNet. The standalone Terraform lab retains its pre-move
+> single-subscription setup and is not the live state owner. See the
 > [completed migration and evidence limits](docs/ARCHITECTURE.md#connectivity-hub-subscription-placement---completed-november-16-2026).
 
 ## The Business Problem
@@ -30,14 +32,14 @@ Use a central network, called a hub, and a separate application network, called 
 
 ### Actual implementation
 
-- Production hub: **10.30.0.0/16**, peered in both directions with the production application spoke, **10.40.0.0/16**.
+- Hub-owned connectivity VNet: **10.30.0.0/16**, peered in both directions with the production-owned application spoke, **10.40.0.0/16**.
 - Production integration subnet: **10.40.1.0/24**; endpoint subnet: **10.40.2.0/24**; future integration reservation: **10.40.3.0/24**.
 - Separate nonproduction application network: **10.20.0.0/16**, using the reusable module.
 - Separate shared engineering-services VNet: **10.50.0.0/20**, owned by a different infrastructure root. The selected source does not define a production peering for this VNet.
 - Both production peerings allow VNet access and keep forwarded traffic, gateway transit and remote-gateway use **Off**.
 - Firewall, resolver and gateway subnet reservations do **not** create those services.
 
-The project includes actual selected Terraform with example resource names, plus a small new offline topology viewer and address-policy checks. This is evidence based on the source code, not a fresh Azure inventory or live packet test. [Source mapping](docs/SOURCE-MAP.md).
+The project includes selected pre-move Terraform with example resource names, a current ownership diagram, an offline topology viewer and address-policy checks. This is evidence based on the source code, not a fresh Azure inventory or live packet test. [Source mapping](docs/SOURCE-MAP.md).
 
 ## Tools Used and What They Do
 
@@ -273,7 +275,7 @@ The isolated boxes are deliberate: the selected source does not prove a route fr
 | Component | Purpose | Source |
 | --- | --- | --- |
 | Reusable network module | Resource group, VNet, delegated Functions integration and endpoint subnet | [Module](infra/modules/network/) |
-| Production hub and spoke | Actual address plan, reservations and peering configured in both directions | [Hub](infra/modules/foundation/hub.tf) · [Spoke](infra/modules/foundation/network.tf) |
+| Pre-move hub/spoke Terraform reference | Actual address plan, reservations and peering intent; retained single-root lab ownership | [Hub](infra/modules/foundation/hub.tf) · [Spoke](infra/modules/foundation/network.tf) |
 | Default-Off public wrapper | Make local validation reproducible without selecting cloud resources by default | [Root](infra/main.tf) |
 | Nonproduction network reference | Show environment-specific inputs to the same module | [Source](reference/nonproduction/network.tf) |
 | Shared engineering VNet reference | Show separate network ownership and reserved managed-service subnets | [Source](reference/shared-services/network.tf) |

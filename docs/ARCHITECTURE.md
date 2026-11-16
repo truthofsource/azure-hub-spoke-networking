@@ -46,12 +46,21 @@ readback verified the new IDs, subnet policies, peerings, unchanged engineering
 network, released state locks and production API HTTP 200. This does not claim
 a routed-packet test from the empty hub.
 
-**Reference boundary:** the approved November 15 diagrams and public Terraform
-excerpts remain pre-move teaching references. Their address plan and peering
-intent still apply; their subscription/group placement and single-root ownership
-must not be read as today's live placement. Do not apply this public example to
-adopt or modify the existing deployment. Updated artwork requires a separate
-preview; this closeout changes documentation only.
+**Diagram and code boundary:** the PNG, SVG and editable draw.io now show the
+accepted November 16 placement. The central VNet is inside the Hub subscription
+boundary. The two separated blue boxes have the same production subscription
+owner; they are not two subscriptions. The wheel positions, purpose icons and
+actual peering relationship are preserved. Gray dotted rays are visual guides,
+not routes or new peerings.
+
+The public Terraform excerpts and offline model remain the pre-move teaching
+reference. Their address plan and peering intent still apply, but their
+single-root ownership is not today's live state layout. The live connectivity
+root/state owns both peer children across subscriptions; it is separate from
+production's application-spoke owner and Hub monitoring. Backend storage location
+does not determine resource subscription ownership. Do not apply this public lab
+to adopt or modify the existing deployment. No cloud operation is performed by
+publishing the diagram. See [source mapping](SOURCE-MAP.md).
 
 See [Azure networking move limitations](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-limitations/networking-move-limitations),
 [changed IDs, dependencies and role-assignment requirements](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-resource-group-and-subscription),
