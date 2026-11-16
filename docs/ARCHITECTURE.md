@@ -2,7 +2,7 @@
 
 **Terms used here:** A private endpoint gives a supported service an address on a private network; access permissions still apply.
 
-The production root defines a connectivity hub (10.30.0.0/16) and application spoke (10.40.0.0/16) in Central US, with a separate peering resource in each direction. Both allow VNet access and disable forwarded traffic, gateway transit and remote gateways. The source defines no Firewall/NVA or user-defined transit route in this selected foundation.
+The retained pre-move production reference defines a connectivity hub (10.30.0.0/16) and application spoke (10.40.0.0/16) in Central US, with a separate peering resource in each direction. Both allow VNet access and disable forwarded traffic, gateway transit and remote gateways. The source defines no Firewall/NVA or user-defined transit route in this selected foundation.
 
 The reusable network module creates the spoke resource group, VNet, integration subnet delegated to Microsoft.App/environments for the selected Functions Flex pattern, and a separate endpoint subnet. Production selects Key Vault and Storage.Global service endpoint entries on integration. Service endpoint entries are not private endpoint NICs and do not close service public access by themselves.
 
@@ -24,15 +24,35 @@ Azure's hub-spoke architecture separates shared connectivity from workload netwo
 
 This portfolio performs no fresh cloud inventory. Dated maintained architecture and mapped source describe implementation context; the local checks validate only the public reference.
 
-## Deferred consideration: connectivity hub subscription placement
+## Connectivity hub subscription placement - completed November 16, 2026
 
-The selected source places the production connectivity hub VNet (`10.30.0.0/16`) and application spoke (`10.40.0.0/16`) in the **production subscription**, in the same connectivity resource group. The separately named **Hub subscription** owns selected engineering, monitoring and security services; its engineering VNet is a different network. “Hub VNet” and “Hub subscription” are not interchangeable.
+The existing Central US connectivity hub VNet (`10.30.0.0/16`) now belongs to
+the **Hub subscription**, in a dedicated connectivity resource group. The
+application spoke (`10.40.0.0/16`) remains in the **production subscription**.
+Only the hub VNet moved; the original resource group also owns the application
+spoke and was not moved. The separate East US 2 engineering VNet is unchanged.
 
-A possible future organizational improvement is to move **only the connectivity hub VNet and its required dependencies** into the Hub subscription. The application spoke, API, databases, documents and website would remain in production unless separately scoped. **Do not move the entire current connectivity resource group:** it also owns the application spoke.
+All six empty reserved subnets were preserved, and both cross-subscription
+peerings are Connected with their original access/transit flags. Azure required
+temporarily removing and exactly restoring the two empty firewall-named subnet
+reservations. No firewall, gateway, resolver, private endpoint or test VM was
+commissioned by the migration.
 
-Before any execution, confirm live attachments and Azure move eligibility; plan the required peering interruption and recreation; update changed resource IDs and applicable permissions; and transfer Terraform ownership to one authoritative root/state without unintended replacement. Validate connectivity, DNS, access and the affected owners' plans afterward. The largely reserved source design is not proof that the live hub has no dependencies.
+A dedicated connectivity Terraform root/state now owns the VNet, six subnet
+instances, both peering children, destination group and one narrowly scoped
+deployment-network role. Nine old state entries were removed without destroying
+resources. Both final owner plans proposed zero Azure changes; independent
+readback verified the new IDs, subnet policies, peerings, unchanged engineering
+network, released state locks and production API HTTP 200. This does not claim
+a routed-packet test from the empty hub.
 
-**Status: deferred, documentation only (November 15, 2026).** No resource move, Terraform/state change, peering change or new shared-network service was performed. The existing diagrams and source continue to represent current documented placement. This is a future assessment topic, not an execution runbook or a commitment to move all shared services.
+**Reference boundary:** the approved November 15 diagrams and public Terraform
+excerpts remain pre-move teaching references. Their address plan and peering
+intent still apply; their subscription/group placement and single-root ownership
+must not be read as today's live placement. Do not apply this public example to
+adopt or modify the existing deployment. Updated artwork requires a separate
+preview; this closeout changes documentation only.
 
-See [Azure networking move limitations](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-limitations/networking-move-limitations), [changed IDs, dependencies and role-assignment requirements](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-resource-group-and-subscription), and [subscription placement guidance](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-subscriptions).
-
+See [Azure networking move limitations](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-limitations/networking-move-limitations),
+[changed IDs, dependencies and role-assignment requirements](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-resource-group-and-subscription),
+and [subscription placement guidance](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-subscriptions).

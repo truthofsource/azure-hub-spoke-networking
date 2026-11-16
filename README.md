@@ -8,6 +8,12 @@
 
 [Business problem](#the-business-problem) · [Solution](#the-solution) · [What was built](#what-was-built) · [Proof it works](#proof-it-works) · [Commands](docs/COMMANDS.md) · [Step by step](#step-by-step)
 
+> **Placement update - November 16, 2026:** the existing connectivity hub VNet
+> has moved into the Hub subscription; the application spoke remains in production.
+> Both peerings are Connected. The approved diagram and public source excerpts
+> below retain the pre-move placement as a teaching reference. See the
+> [completed migration and evidence limits](docs/ARCHITECTURE.md#connectivity-hub-subscription-placement---completed-november-16-2026).
+
 ## The Business Problem
 
 The organization runs a production application, a separate test environment and shared engineering services. As these grow, each new database, worker or internal tool needs an agreed place in the network and a clear owner. Ad hoc connections can create overlapping addresses, unexpected access or dependencies that are difficult to understand during a change.
