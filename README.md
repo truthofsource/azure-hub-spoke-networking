@@ -8,13 +8,13 @@
 
 [Business problem](#the-business-problem) · [Solution](#the-solution) · [What was built](#what-was-built) · [Proof it works](#proof-it-works) · [Commands](docs/COMMANDS.md) · [Step by step](#step-by-step)
 
-> **Placement update - November 16, 2026:** the existing connectivity hub VNet
-> has moved into the Hub subscription; the application spoke remains in production.
-> Both peerings are Connected. The diagram now shows this current ownership:
-> both blue boxes share the production subscription; the purple Hub boundary
-> contains the central VNet. The standalone Terraform lab retains its pre-move
-> single-subscription setup and is not the live state owner. See the
-> [completed migration and evidence limits](docs/ARCHITECTURE.md#connectivity-hub-subscription-placement---completed-november-16-2026).
+> **Network expansion - November 16, 2026:** the wheel now shows the Hub-owned
+> connectivity VNet and all seven directly peered spokes. Four new VNets are
+> empty foundations; engineering and nonproduction are reused. All fourteen
+> peering records were Connected at acceptance. No staging or workload migration
+> was introduced. The standalone Terraform lab below remains a smaller,
+> pre-move example; it does not create the full current diagram. See
+> [the current topology and evidence boundaries](docs/ARCHITECTURE.md).
 
 ## The Business Problem
 
@@ -32,14 +32,23 @@ Use a central network, called a hub, and a separate application network, called 
 
 ### Actual implementation
 
-- Hub-owned connectivity VNet: **10.30.0.0/16**, peered in both directions with the production-owned application spoke, **10.40.0.0/16**.
-- Production integration subnet: **10.40.1.0/24**; endpoint subnet: **10.40.2.0/24**; future integration reservation: **10.40.3.0/24**.
-- Separate nonproduction application network: **10.20.0.0/16**, using the reusable module.
-- Separate shared engineering-services VNet: **10.50.0.0/20**, owned by a different infrastructure root. The selected source does not define a production peering for this VNet.
-- Both production peerings allow VNet access and keep forwarded traffic, gateway transit and remote-gateway use **Off**.
-- Firewall, resolver and gateway subnet reservations do **not** create those services.
+- **Hub / Central US:** connectivity VNet `10.30.0.0/16`, automation `10.60.0.0/16` and integration `10.70.0.0/16`.
+- **Hub / East US 2:** reused engineering VNet `10.50.0.0/20`, with two new empty CI/test reservations; the existing Backstage subnet is unchanged.
+- **Production / Central US:** retained application VNet `10.40.0.0/16` and new analytics `10.80.0.0/16`.
+- **Production / East US 2:** new cold recovery VNet `10.90.0.0/16`; no replica or failover service is commissioned.
+- **Nonproduction / East US 2:** reused development/test VNet `10.20.0.0/16`; its API remains Disabled.
+- Seven direct hub/spoke pairs mean fourteen peering records. VNet access is On; forwarded traffic, gateway transit and remote gateways are Off. There is no automatic spoke transit.
+- Four new VNets and fourteen new restricted subnets are empty. Six NSGs have custom inbound/outbound reservation-deny rules; five new network grants use narrow scopes.
 
-The project includes selected pre-move Terraform with example resource names, a current ownership diagram, an offline topology viewer and address-policy checks. This is evidence based on the source code, not a fresh Azure inventory or live packet test. [Source mapping](docs/SOURCE-MAP.md).
+The completed expansion added 72 Terraform instances without updating/deleting
+the eleven retained instances. The connectivity state now tracks 83 instances;
+the full post-plan was zero-change. This is dated configuration acceptance, not
+a fresh packet test or proof of regional failover.
+
+The project preserves the original selected Terraform and offline lab as a
+smaller teaching reference. The current wheel and architecture describe the
+later accepted environment; the lab's source/tests do not deploy or validate
+every newly drawn spoke. [Source mapping](docs/SOURCE-MAP.md).
 
 ## Tools Used and What They Do
 

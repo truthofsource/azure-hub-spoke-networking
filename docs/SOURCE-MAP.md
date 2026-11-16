@@ -21,9 +21,14 @@ The shared-service resource definitions contain partial historical context. They
 
 ## Current diagram - November 16, 2026
 
-The three architecture formats describe the accepted post-move placement: the
-connectivity VNet is Hub-owned, the application spoke stays production-owned,
-and the separate engineering VNet is unchanged. They replace the prior primary
-diagram in place. The original machine source map still identifies the retained
-Terraform excerpts; it is not a new source/state snapshot for the completed move.
-No private subscription IDs, state, credentials or employee data were added.
+The three primary formats now show the accepted seven-spoke expansion: four
+new empty VNets, reused engineering/nonproduction and the retained application
+spoke around the Hub-owned connectivity VNet. All seven double arrows are real
+configured peering pairs; there are no decorative rays or implied transit links.
+
+The original machine source map and selected Terraform/offline model retain
+their smaller pre-move scope. They are not a snapshot of the new connectivity
+root and do not create all seven spokes. Current diagram acceptance is a dated
+configuration check; no fresh packet/failover test is claimed. Old primary
+diagrams are replaced in place, not retained as extra versions. No private
+subscription IDs, secrets, state or employee data are published.

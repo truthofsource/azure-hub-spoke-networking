@@ -1,82 +1,115 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<svg xmlns="http://www.w3.org/2000/svg" width="1900" height="1640" viewBox="0 0 1900 1640" role="img" aria-labelledby="title desc">
-<title id="title">Azure network — star hub and spoke</title>
-<desc id="desc">Hub-owned connectivity VNet at the center of a wheel; the application spoke remains in production. Two separated blue boxes share production ownership. Gray rays are visual guides, not network links.</desc>
-<defs><marker id="peer" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="#245b91"/></marker></defs>
-<rect width="1900" height="1640" fill="white"/>
-<g font-family="Arial,Helvetica,sans-serif">
-<text x="30" y="31" font-size="12" letter-spacing="1.6" fill="#617084">CURRENT PLACEMENT - NOVEMBER 16, 2026</text>
-<text x="30" y="72" font-size="32" font-weight="700" fill="#172d46">Azure network — star hub and spoke</text>
-<circle cx="950" cy="790" r="560" fill="none" stroke="#dde3eb" stroke-width="2.5"/>
-<path d="M950.0 622.0 L950.0 230.0" fill="none" stroke="#c9d2de" stroke-width="1.5" stroke-dasharray="3 6"/>
-<path d="M1095.4922678357857 706.0 L1434.9742261192857 510.00000000000006" fill="none" stroke="#c9d2de" stroke-width="1.5" stroke-dasharray="3 6"/>
-<path d="M1095.4922678357857 874.0 L1434.9742261192857 1070.0" fill="none" stroke="#c9d2de" stroke-width="1.5" stroke-dasharray="3 6"/>
-<path d="M804.5077321642143 874.0 L465.0257738807143 1070.0" fill="none" stroke="#c9d2de" stroke-width="1.5" stroke-dasharray="3 6"/>
-<path d="M804.5077321642143 706.0 L465.0257738807144 509.99999999999994" fill="none" stroke="#c9d2de" stroke-width="1.5" stroke-dasharray="3 6"/>
-<g data-node="prod-app"><rect x="710" y="110" width="480" height="230" rx="10" fill="none" stroke="#6c8ebf" stroke-width="1.5" stroke-dasharray="7 5"/><text x="724" y="133" font-size="14" font-weight="700" fill="#526276">Production subscription - application services</text></g>
-<g data-node="prod-spoke"><rect x="710" y="1210" width="480" height="310" rx="10" fill="none" stroke="#6c8ebf" stroke-width="1.5" stroke-dasharray="7 5"/><text x="724" y="1233" font-size="14" font-weight="700" fill="#526276">Production subscription - application network</text></g>
-<g data-node="hub-sub"><rect x="220" y="350" width="970" height="850" rx="10" fill="none" stroke="#9673a6" stroke-width="1.5" stroke-dasharray="7 5"/><text x="234" y="373" font-size="14" font-weight="700" fill="#526276">Hub subscription - connectivity and shared services</text></g>
-<g data-node="np-sub"><rect x="1200" y="350" width="480" height="900" rx="10" fill="none" stroke="#d79b00" stroke-width="1.5" stroke-dasharray="7 5"/><text x="1214" y="373" font-size="14" font-weight="700" fill="#526276">Nonproduction subscription</text></g>
-<g data-node="app-services">
-<rect x="730.0" y="140.0" width="440" height="180" rx="9" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.8"/>
-<text x="746.0" y="163.0" font-size="10.5" font-weight="700" fill="#526276">SEPARATE APPLICATION / DATA / WEB / DOCUMENT RGs</text>
-<text x="746.0" y="194.0" font-size="18" font-weight="700" fill="#20384f">Application services</text>
-<text x="746.0" y="225.0" font-size="14" fill="#40556b">Functions API, Azure SQL, Blob Storage and Static Web</text>
-<text x="746.0" y="244.0" font-size="14" fill="#40556b">Apps. The API integrates with the application spoke.</text>
-<svg width="36" height="36" viewBox="0 0 40 40" x="1122.0" y="149.0" data-purpose-icon="app-services"><rect x="1" y="1" width="38" height="38" rx="8" fill="white" stroke="#315f8a" stroke-opacity="0.3"/><g transform="translate(8 8)" fill="none" stroke="#315f8a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 20a5 5 0 1 1 0-10 7 7 0 0 1 13-2 6 6 0 1 1 0 12H6Z"/></g></svg></g>
-<g data-node="np-network">
-<rect x="1214.97" y="420.0" width="440" height="180" rx="9" fill="#ffe6cc" stroke="#d79b00" stroke-width="1.8"/>
-<text x="1230.97" y="443.0" font-size="10.5" font-weight="700" fill="#526276">NONPRODUCTION NETWORK RG</text>
-<text x="1230.97" y="474.0" font-size="18" font-weight="700" fill="#20384f">Test application VNet</text>
-<text x="1230.97" y="505.0" font-size="14" fill="#40556b">10.20.0.0/16</text>
-<text x="1230.97" y="524.0" font-size="14" fill="#40556b">Separate integration and endpoint subnets. No production</text>
-<text x="1230.97" y="543.0" font-size="14" fill="#40556b">peering is shown.</text>
-<svg width="36" height="36" viewBox="0 0 40 40" x="1606.97" y="429.0" data-purpose-icon="np-network"><rect x="1" y="1" width="38" height="38" rx="8" fill="white" stroke="#315f8a" stroke-opacity="0.3"/><g transform="translate(8 8)" fill="none" stroke="#315f8a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><rect x="1" y="1" width="5" height="5" rx="1"/><rect x="18" y="1" width="5" height="5" rx="1"/><rect x="1" y="18" width="5" height="5" rx="1"/><rect x="18" y="18" width="5" height="5" rx="1"/><path d="m6 6 4 4m4 0 4-4M6 18l4-4m4 0 4 4"/></g></svg></g>
-<g data-node="np-shared">
-<rect x="1214.97" y="980.0" width="440" height="180" rx="9" fill="#ffe6cc" stroke="#d79b00" stroke-width="1.8"/>
-<text x="1230.97" y="1003.0" font-size="10.5" font-weight="700" fill="#526276">SEPARATE SHARED-DEPENDENCY RGs</text>
-<text x="1230.97" y="1034.0" font-size="18" font-weight="700" fill="#20384f">Runtime dependencies</text>
-<text x="1230.97" y="1065.0" font-size="14" fill="#40556b">Selected registries, credentials, state and</text>
-<text x="1230.97" y="1084.0" font-size="14" fill="#40556b">communication services support other environments too.</text>
-<svg width="36" height="36" viewBox="0 0 40 40" x="1606.97" y="989.0" data-purpose-icon="np-shared"><rect x="1" y="1" width="38" height="38" rx="8" fill="white" stroke="#315f8a" stroke-opacity="0.3"/><g transform="translate(8 8)" fill="none" stroke="#315f8a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="1"/><path d="M6 8v8m4-8v8m4-8v8m4-8v8M5 2h14M5 22h14"/></g></svg></g>
-<g data-node="spoke">
-<rect x="730.0" y="1240.0" width="440" height="220" rx="9" fill="#d5e8d4" stroke="#82b366" stroke-width="1.8"/>
-<text x="746.0" y="1263.0" font-size="10.5" font-weight="700" fill="#526276">PRODUCTION CONNECTIVITY RG</text>
-<text x="746.0" y="1294.0" font-size="18" font-weight="700" fill="#20384f">Application spoke VNet</text>
-<text x="746.0" y="1325.0" font-size="14" fill="#40556b">10.40.0.0/16</text>
-<text x="746.0" y="1344.0" font-size="14" fill="#40556b">Integration subnet: 10.40.1.0/24</text>
-<text x="746.0" y="1363.0" font-size="14" fill="#40556b">Endpoint subnet: 10.40.2.0/24</text>
-<text x="746.0" y="1382.0" font-size="14" fill="#40556b">The documented peered spoke.</text>
-<svg width="36" height="36" viewBox="0 0 40 40" x="1122.0" y="1249.0" data-purpose-icon="spoke"><rect x="1" y="1" width="38" height="38" rx="8" fill="white" stroke="#315f8a" stroke-opacity="0.3"/><g transform="translate(8 8)" fill="none" stroke="#315f8a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><rect x="1" y="1" width="5" height="5" rx="1"/><rect x="18" y="1" width="5" height="5" rx="1"/><rect x="1" y="18" width="5" height="5" rx="1"/><rect x="18" y="18" width="5" height="5" rx="1"/><path d="m6 6 4 4m4 0 4-4M6 18l4-4m4 0 4 4"/></g></svg></g>
-<g data-node="engineering">
-<rect x="245.03" y="980.0" width="440" height="180" rx="9" fill="#e1d5e7" stroke="#9673a6" stroke-width="1.8"/>
-<text x="261.03" y="1003.0" font-size="10.5" font-weight="700" fill="#526276">ENGINEERING NETWORK / PORTAL RGs</text>
-<text x="261.03" y="1034.0" font-size="18" font-weight="700" fill="#20384f">Engineering VNet + portal</text>
-<text x="261.03" y="1065.0" font-size="14" fill="#40556b">10.50.0.0/20</text>
-<text x="261.03" y="1084.0" font-size="14" fill="#40556b">Backstage VM subnet: 10.50.2.64/27</text>
-<text x="261.03" y="1103.0" font-size="14" fill="#40556b">Separate network; no production peering is shown.</text>
-<svg width="36" height="36" viewBox="0 0 40 40" x="637.03" y="989.0" data-purpose-icon="engineering"><rect x="1" y="1" width="38" height="38" rx="8" fill="white" stroke="#315f8a" stroke-opacity="0.3"/><g transform="translate(8 8)" fill="none" stroke="#315f8a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M2 8h20M5 5.5h.1M8 5.5h.1M11 5.5h.1"/></g></svg></g>
-<g data-node="monitoring">
-<rect x="245.03" y="420.0" width="440" height="180" rx="9" fill="#e1d5e7" stroke="#9673a6" stroke-width="1.8"/>
-<text x="261.03" y="443.0" font-size="10.5" font-weight="700" fill="#526276">MONITORING / SECURITY / REGISTRY RGs</text>
-<text x="261.03" y="474.0" font-size="18" font-weight="700" fill="#20384f">Shared engineering services</text>
-<text x="261.03" y="505.0" font-size="14" fill="#40556b">Operations workspace, separate Sentinel security</text>
-<text x="261.03" y="524.0" font-size="14" fill="#40556b">workspace and engineering registry. These are outside</text>
-<text x="261.03" y="543.0" font-size="14" fill="#40556b">the VNets.</text>
-<svg width="36" height="36" viewBox="0 0 40 40" x="637.03" y="429.0" data-purpose-icon="monitoring"><rect x="1" y="1" width="38" height="38" rx="8" fill="white" stroke="#315f8a" stroke-opacity="0.3"/><g transform="translate(8 8)" fill="none" stroke="#315f8a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v20h19M7 17v-5h3v5m3 0V8h3v9m3 0V4h3v13"/></g></svg></g>
-<g data-node="hub-vnet">
-<rect x="790" y="630" width="320" height="320" fill="none" stroke="none"/><circle cx="950" cy="790" r="160" fill="#234c72" stroke="#173b5b" stroke-width="3"/>
-<text x="950" y="710" text-anchor="middle" font-size="20" font-weight="700" fill="white">Connectivity hub VNet</text>
-<text x="950" y="749" text-anchor="middle" font-size="14" fill="#e7f0f9">10.30.0.0/16</text>
-<text x="950" y="770" text-anchor="middle" font-size="14" fill="#e7f0f9">NETWORK HUB</text>
-<text x="950" y="791" text-anchor="middle" font-size="14" fill="#e7f0f9">Reserved Firewall / DNS / gateway</text>
-<text x="950" y="812" text-anchor="middle" font-size="14" fill="#e7f0f9">services remain off.</text>
-<text x="950" y="906" text-anchor="middle" font-size="11" fill="#d5e6f6">HUB CONNECTIVITY RG</text>
-<svg width="36" height="36" viewBox="0 0 40 40" x="932.0" y="650" data-purpose-icon="hub-vnet"><rect x="1" y="1" width="38" height="38" rx="8" fill="white" stroke="#315f8a" stroke-opacity="0.3"/><g transform="translate(8 8)" fill="none" stroke="#315f8a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><rect x="1" y="1" width="5" height="5" rx="1"/><rect x="18" y="1" width="5" height="5" rx="1"/><rect x="1" y="18" width="5" height="5" rx="1"/><rect x="18" y="18" width="5" height="5" rx="1"/><path d="m6 6 4 4m4 0 4-4M6 18l4-4m4 0 4 4"/></g></svg></g>
-<path d="M950 961 V1228.0" fill="none" stroke="#245b91" stroke-width="4.5" marker-start="url(#peer)" marker-end="url(#peer)"/>
-<rect x="964" y="1009" width="214" height="58" rx="5" fill="white"/><text x="976" y="1031" font-size="15" font-weight="700" fill="#245b91">Two-way VNet peering</text><text x="976" y="1054" font-size="13" fill="#526276">The actual network connection</text>
-<text x="30" y="1550" font-size="13" fill="#526276">Blue double arrow = documented VNet peering. Gray dotted rays and rim = visual guides only, not traffic paths or peerings.</text>
-<text x="30" y="1572" font-size="13" fill="#526276">The center is the Hub-owned connectivity VNet. Engineering and nonproduction remain separate networks; no peering to them is implied.</text>
-<text x="30" y="1594" font-size="13" fill="#526276">Subscription outlines show ownership. Both blue production boxes are in the same subscription; the purple boundary owns the hub.</text>
-<text x="30" y="1616" font-size="13" fill="#526276">Peering does not guarantee application access or automatic transit. Routes, DNS, security rules and service permissions still apply. Local architecture refresh; no service activation.</text>
-</g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="1720" viewBox="0 0 2000 1720" role="img" aria-labelledby="title desc" font-family="Segoe UI,Arial,sans-serif">
+<title id="title">Azure hub and seven spokes - accepted November 16, 2026</title>
+<desc id="desc">Wheel centered on the Hub-owned connectivity VNet. Seven direct peering pairs connect application, analytics, recovery, automation, integration, engineering and nonproduction. Color and labels identify subscription ownership. New networks are empty foundations, not running workloads or automatic transit.</desc>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto-start-reverse"><path d="M0 0L9 4.5L0 9" fill="#507a9f"/></marker>
+<g id="icon-network" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="24" height="16" rx="3"/><path d="M14 18v8M3 32h22M3 26v6M25 26v6"/><rect x="-3" y="32" width="12" height="8" rx="2"/><rect x="19" y="32" width="12" height="8" rx="2"/></g>
+<g id="icon-cloud" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 31h29a9 9 0 0 0 0-18 13 13 0 0 0-24-2A10 10 0 0 0 3 31Z"/></g>
+<g id="icon-chart" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M0 0v36h36"/><rect x="7" y="21" width="6" height="10"/><rect x="18" y="13" width="6" height="18"/><rect x="29" y="4" width="6" height="27"/></g>
+<g id="icon-recovery" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12a16 16 0 1 1-1 19M5 1v12h12"/><path d="M21 11v12l8 5"/></g>
+<g id="icon-gear" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 0h8l2 7 6 3 7-1 4 7-5 6v7l5 6-4 7-7-1-6 3-2 7h-8l-2-7-6-3-7 1-4-7 5-6v-7l-5-6 4-7 7 1 6-3Z" transform="scale(.8)"/><circle cx="17" cy="20" r="7"/></g>
+<g id="icon-link" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 26-5 5a9 9 0 0 1-13-13l9-9a9 9 0 0 1 13 0M15 12l5-5a9 9 0 0 1 13 13l-9 9a9 9 0 0 1-13 0M8 24l16-16"/></g>
+<g id="icon-tools" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m0 35 18-18a13 13 0 0 1 16-16l-8 8 6 6 8-8a13 13 0 0 1-16 16L6 41Z"/></g>
+<g id="icon-flask" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 1h20M14 1v15L1 37a4 4 0 0 0 4 6h30a4 4 0 0 0 4-6L26 16V1M9 29h22"/><circle cx="15" cy="35" r="1"/></g>
+</defs>
+<rect width="2000" height="1720" fill="#f7f9fc"/>
+<text x="70" y="57" font-size="34" fill="#19354d" font-weight="bold" text-anchor="start">AZURE HUB AND SPOKE</text>
+<text x="70" y="90" font-size="21" fill="#24364b" font-weight="normal" text-anchor="start">Seven spokes | Accepted network configuration: November 16, 2026, 17:24 UTC</text>
+<text x="70" y="123" font-size="19" fill="#24364b" font-weight="normal" text-anchor="start">The center is a VNet. Each card states its subscription owner; colors are ownership labels, not transit routes.</text>
+<rect x="1120" y="35" width="246" height="38" rx="19" fill="#f0e8f6" stroke="#80569c"/>
+<text x="1243" y="61" font-size="17" fill="#80569c" font-weight="bold" text-anchor="middle">Hub subscription</text>
+<rect x="1385" y="35" width="246" height="38" rx="19" fill="#e8f1fc" stroke="#356da7"/>
+<text x="1508" y="61" font-size="17" fill="#356da7" font-weight="bold" text-anchor="middle">Production subscription</text>
+<rect x="1650" y="35" width="246" height="38" rx="19" fill="#fff2da" stroke="#9b6716"/>
+<text x="1773" y="61" font-size="17" fill="#9b6716" font-weight="bold" text-anchor="middle">Nonproduction subscription</text>
+<line data-peer="application" x1="1000.0" y1="692.0" x2="1000.0" y2="368.0" stroke="#507a9f" stroke-width="4" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+<line data-peer="analytics" x1="1160.510496921094" y1="692.0" x2="1302.3992682228268" y2="578.85" stroke="#507a9f" stroke-width="4" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+<line data-peer="recovery" x1="1240.0" y1="874.7776393875009" x2="1335.96" y2="896.6795655359367" stroke="#507a9f" stroke-width="4" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+<line data-peer="automation" x1="1061.6406231418719" y1="948.0" x2="1190.9607242240456" y2="1216.54" stroke="#507a9f" stroke-width="4" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+<line data-peer="integration" x1="938.3593768581281" y1="948.0" x2="809.0392757759544" y2="1216.54" stroke="#507a9f" stroke-width="4" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+<line data-peer="engineering" x1="760.0" y1="874.7776393875009" x2="664.04" y2="896.6795655359367" stroke="#507a9f" stroke-width="4" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+<line data-peer="nonproduction" x1="839.489503078906" y1="692.0" x2="697.6007317771732" y2="578.85" stroke="#507a9f" stroke-width="4" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+<g data-node="application"><rect x="790.0" y="152.0" width="420" height="216" rx="15" fill="white" stroke="#356da7" stroke-width="2.5"/>
+<rect x="790.0" y="152.0" width="420" height="38" rx="12" fill="#e8f1fc"/>
+<text x="808.0" y="178.0" font-size="17" fill="#356da7" font-weight="bold" text-anchor="start">Production subscription | Central US</text>
+<use href="#icon-cloud" x="814.0" y="212.0" color="#356da7"/>
+<text x="875.0" y="229.0" font-size="23" fill="#19354d" font-weight="bold" text-anchor="start">Application</text>
+<text x="875.0" y="260.0" font-size="22" fill="#19354d" font-weight="normal" text-anchor="start">10.40.0.0/16</text>
+<text x="810.0" y="294.0" font-size="19" fill="#356da7" font-weight="bold" text-anchor="start">Existing workload network</text>
+<text x="810.0" y="323.0" font-size="18" fill="#24364b" font-weight="normal" text-anchor="start">API and data paths retained</text>
+<text x="810.0" y="348.0" font-size="18" fill="#24364b" font-weight="normal" text-anchor="start">Original application peers unchanged</text>
+</g>
+<g data-node="analytics"><rect x="1227.83" y="362.85" width="420" height="216" rx="15" fill="white" stroke="#356da7" stroke-width="2.5"/>
+<rect x="1227.83" y="362.85" width="420" height="38" rx="12" fill="#e8f1fc"/>
+<text x="1245.83" y="388.85" font-size="17" fill="#356da7" font-weight="bold" text-anchor="start">Production subscription | Central US</text>
+<use href="#icon-chart" x="1251.83" y="422.85" color="#356da7"/>
+<text x="1312.83" y="439.85" font-size="23" fill="#19354d" font-weight="bold" text-anchor="start">Analytics / reporting</text>
+<text x="1312.83" y="470.85" font-size="22" fill="#19354d" font-weight="normal" text-anchor="start">10.80.0.0/16</text>
+<text x="1247.83" y="504.85" font-size="19" fill="#356da7" font-weight="bold" text-anchor="start">New empty foundation</text>
+<text x="1247.83" y="533.85" font-size="18" fill="#24364b" font-weight="normal" text-anchor="start">Ingestion | processing | endpoints</text>
+<text x="1247.83" y="558.85" font-size="18" fill="#24364b" font-weight="normal" text-anchor="start">No business-data permission added</text>
+</g>
+<g data-node="recovery"><rect x="1335.96" y="836.61" width="420" height="216" rx="15" fill="white" stroke="#356da7" stroke-width="2.5"/>
+<rect x="1335.96" y="836.61" width="420" height="38" rx="12" fill="#e8f1fc"/>
+<text x="1353.96" y="862.61" font-size="17" fill="#356da7" font-weight="bold" text-anchor="start">Production subscription | East US 2</text>
+<use href="#icon-recovery" x="1359.96" y="896.61" color="#356da7"/>
+<text x="1420.96" y="913.61" font-size="23" fill="#19354d" font-weight="bold" text-anchor="start">Regional recovery</text>
+<text x="1420.96" y="944.61" font-size="22" fill="#19354d" font-weight="normal" text-anchor="start">10.90.0.0/16</text>
+<text x="1355.96" y="978.61" font-size="19" fill="#356da7" font-weight="bold" text-anchor="start">New empty foundation</text>
+<text x="1355.96" y="1007.61" font-size="18" fill="#24364b" font-weight="normal" text-anchor="start">Application | data | endpoints</text>
+<text x="1355.96" y="1032.6100000000001" font-size="18" fill="#24364b" font-weight="normal" text-anchor="start">No replica or failover service</text>
+</g>
+<g data-node="automation"><rect x="1032.97" y="1216.54" width="420" height="216" rx="15" fill="white" stroke="#80569c" stroke-width="2.5"/>
+<rect x="1032.97" y="1216.54" width="420" height="38" rx="12" fill="#f0e8f6"/>
+<text x="1050.97" y="1242.54" font-size="17" fill="#80569c" font-weight="bold" text-anchor="start">Hub subscription | Central US</text>
+<use href="#icon-gear" x="1056.97" y="1276.54" color="#80569c"/>
+<text x="1117.97" y="1293.54" font-size="23" fill="#19354d" font-weight="bold" text-anchor="start">Business automation</text>
+<text x="1117.97" y="1324.54" font-size="22" fill="#19354d" font-weight="normal" text-anchor="start">10.60.0.0/16</text>
+<text x="1052.97" y="1358.54" font-size="19" fill="#80569c" font-weight="bold" text-anchor="start">New empty foundation</text>
+<text x="1052.97" y="1387.54" font-size="18" fill="#24364b" font-weight="normal" text-anchor="start">Jobs | functions | endpoints</text>
+<text x="1052.97" y="1412.54" font-size="18" fill="#24364b" font-weight="normal" text-anchor="start">Workers have not moved here</text>
+</g>
+<g data-node="integration"><rect x="547.03" y="1216.54" width="420" height="216" rx="15" fill="white" stroke="#80569c" stroke-width="2.5"/>
+<rect x="547.03" y="1216.54" width="420" height="38" rx="12" fill="#f0e8f6"/>
+<text x="565.03" y="1242.54" font-size="17" fill="#80569c" font-weight="bold" text-anchor="start">Hub subscription | Central US</text>
+<use href="#icon-link" x="571.03" y="1276.54" color="#80569c"/>
+<text x="632.03" y="1293.54" font-size="23" fill="#19354d" font-weight="bold" text-anchor="start">Integration</text>
+<text x="632.03" y="1324.54" font-size="22" fill="#19354d" font-weight="normal" text-anchor="start">10.70.0.0/16</text>
+<text x="567.03" y="1358.54" font-size="19" fill="#80569c" font-weight="bold" text-anchor="start">New empty foundation</text>
+<text x="567.03" y="1387.54" font-size="18" fill="#24364b" font-weight="normal" text-anchor="start">Connectors | endpoints | admin</text>
+<text x="567.03" y="1412.54" font-size="18" fill="#24364b" font-weight="normal" text-anchor="start">No AD, VPN or gateway activated</text>
+</g>
+<g data-node="engineering"><rect x="244.04" y="836.61" width="420" height="216" rx="15" fill="white" stroke="#80569c" stroke-width="2.5"/>
+<rect x="244.04" y="836.61" width="420" height="38" rx="12" fill="#f0e8f6"/>
+<text x="262.03999999999996" y="862.61" font-size="17" fill="#80569c" font-weight="bold" text-anchor="start">Hub subscription | East US 2</text>
+<use href="#icon-tools" x="268.03999999999996" y="896.61" color="#80569c"/>
+<text x="329.03999999999996" y="913.61" font-size="23" fill="#19354d" font-weight="bold" text-anchor="start">Engineering tools</text>
+<text x="329.03999999999996" y="944.61" font-size="22" fill="#19354d" font-weight="normal" text-anchor="start">10.50.0.0/20</text>
+<text x="264.03999999999996" y="978.61" font-size="19" fill="#80569c" font-weight="bold" text-anchor="start">Existing VNet reused</text>
+<text x="264.03999999999996" y="1007.61" font-size="18" fill="#24364b" font-weight="normal" text-anchor="start">Backstage subnet unchanged</text>
+<text x="264.03999999999996" y="1032.6100000000001" font-size="18" fill="#24364b" font-weight="normal" text-anchor="start">Two empty CI / test reservations</text>
+</g>
+<g data-node="nonproduction"><rect x="352.17" y="362.85" width="420" height="216" rx="15" fill="white" stroke="#9b6716" stroke-width="2.5"/>
+<rect x="352.17" y="362.85" width="420" height="38" rx="12" fill="#fff2da"/>
+<text x="370.17" y="388.85" font-size="17" fill="#9b6716" font-weight="bold" text-anchor="start">Nonproduction subscription | East US 2</text>
+<use href="#icon-flask" x="376.17" y="422.85" color="#9b6716"/>
+<text x="437.17" y="439.85" font-size="23" fill="#19354d" font-weight="bold" text-anchor="start">Development / test</text>
+<text x="437.17" y="470.85" font-size="22" fill="#19354d" font-weight="normal" text-anchor="start">10.20.0.0/16</text>
+<text x="372.17" y="504.85" font-size="19" fill="#9b6716" font-weight="bold" text-anchor="start">Existing VNet reused</text>
+<text x="372.17" y="533.85" font-size="18" fill="#24364b" font-weight="normal" text-anchor="start">New direct hub peering</text>
+<text x="372.17" y="558.85" font-size="18" fill="#24364b" font-weight="normal" text-anchor="start">API remains Disabled</text>
+</g>
+<g data-node="hub"><rect x="760" y="692" width="480" height="256" rx="28" fill="#f0e8f6" stroke="#80569c" stroke-width="4"/>
+<use href="#icon-network" x="790" y="720" color="#80569c"/>
+<text x="1000" y="728" font-size="18" fill="#54386e" font-weight="bold" text-anchor="middle">HUB SUBSCRIPTION</text>
+<text x="1000" y="772" font-size="29" fill="#54386e" font-weight="bold" text-anchor="middle">Connectivity hub VNet</text>
+<text x="1000" y="811" font-size="23" fill="#54386e" font-weight="normal" text-anchor="middle">10.30.0.0/16 | Central US</text>
+<text x="1000" y="849" font-size="20" fill="#54386e" font-weight="bold" text-anchor="middle">7 peering pairs = 14 Connected records</text>
+<text x="1000" y="884" font-size="19" fill="#54386e" font-weight="normal" text-anchor="middle">6 original empty service reservations</text>
+<text x="1000" y="919" font-size="18" fill="#54386e" font-weight="normal" text-anchor="middle">No firewall, gateway or resolver activated</text>
+</g>
+<rect x="70" y="1515" width="1860" height="155" rx="14" fill="white" stroke="#bccbd8"/>
+<text x="95" y="1549" font-size="20" fill="#19354d" font-weight="bold" text-anchor="start">HOW TO READ THIS WHEEL</text>
+<text x="95" y="1581" font-size="20" fill="#24364b" font-weight="normal" text-anchor="start">Each blue double arrow is a direct hub/spoke peering pair. No spoke-to-spoke mesh or automatic hub transit is configured.</text>
+<text x="95" y="1612" font-size="20" fill="#24364b" font-weight="normal" text-anchor="start">Four new VNets and 14 new restricted subnets are empty. Existing hosts, endpoints and operating states were preserved.</text>
+<text x="95" y="1643" font-size="20" fill="#24364b" font-weight="normal" text-anchor="start">Shared workspaces and registries are managed services, not nodes in this network wheel. No staging environment was added.</text>
+</svg>

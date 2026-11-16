@@ -66,3 +66,13 @@ checks passed. No Terraform source, source snapshot, cloud resource, service
 power state, paid network service or message changed. The existing workflow is
 manual-only and was not dispatched. These checks do not prove live packet flow
 or every caller's private path; earlier cloud acceptance retains its stated date.
+
+## Seven-spoke diagram publication - November 16, 2026
+
+Replaced the primary PNG/SVG/draw.io with one current icon wheel: eight network
+nodes, seven edges and eight purpose icons. Text bounds and node overlap checks
+passed; the PNG was visually reviewed. SVG and draw.io use the same address,
+subscription, region and status model. README/architecture/source notes separate
+the accepted expansion from the retained smaller Terraform/offline example.
+The fourteen existing offline tests still apply only to that example.
+No cloud apply, service start, provider call or automatic workflow was requested.

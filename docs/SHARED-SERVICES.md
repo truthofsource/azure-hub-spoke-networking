@@ -8,7 +8,10 @@ Treat three questions separately: who owns a resource, which network it uses, an
 
 The November 16 move put the existing Central US connectivity VNet in the Hub
 subscription. The application spoke remains production-owned, and the engineering
-VNet remains separate. Subscription ownership does not create transit or put
+VNet remains separate, now with its own direct hub peering. The expansion also
+added automation/integration in Hub and analytics/recovery in Production, plus
+nonproduction hub peering. These new foundations do not move workers or
+commission shared appliances. Subscription ownership does not create transit or put
 every shared service inside the central VNet. The [current diagram and boundaries](ARCHITECTURE.md)
 show this separation.
 

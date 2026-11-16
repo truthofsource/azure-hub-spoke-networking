@@ -1,4 +1,34 @@
-# Actual topology versus a reference diagram
+# Current topology and retained teaching reference
+
+## Current seven-spoke wheel - accepted November 16, 17:24 UTC
+
+The primary PNG, SVG and editable draw.io show the Hub-owned connectivity VNet
+at the center with seven direct peering pairs. Each card labels its subscription
+and region. Purple means Hub, blue means Production and gold means Nonproduction;
+the color is an ownership label, not a routing or access guarantee.
+
+| Spoke | Subscription / region | Prefix | Accepted state |
+| --- | --- | --- | --- |
+| Application | Production / Central US | `10.40.0.0/16` | Existing network retained |
+| Engineering | Hub / East US 2 | `10.50.0.0/20` | Existing VNet; two new empty reservations |
+| Development/test | Nonproduction / East US 2 | `10.20.0.0/16` | Existing VNet; API paused |
+| Automation | Hub / Central US | `10.60.0.0/16` | New empty foundation |
+| Integration | Hub / Central US | `10.70.0.0/16` | New empty foundation |
+| Analytics | Production / Central US | `10.80.0.0/16` | New empty foundation |
+| Regional recovery | Production / East US 2 | `10.90.0.0/16` | New empty foundation, no failover |
+
+The hub remains `10.30.0.0/16` in Central US. All fourteen peering records were
+Connected at acceptance. The expansion added 72 instances, preserving the
+original eleven, with zero updates/deletes and a zero-change post-plan.
+Fourteen new empty subnets have their intended NSGs and restricted reservation
+policies. Original subnet properties, runtime states and endpoints were preserved.
+
+There is no spoke mesh, automatic hub transit, new staging environment or worker
+migration. The four new networks do not supply active applications, VPN/AD,
+firewall inspection or tested DR. Managed workspaces/registries are omitted
+from the network wheel because they are not VNets inside the hub.
+
+## Retained source example - smaller pre-expansion scope
 
 **Terms used here:** A private endpoint gives a supported service an address on a private network; access permissions still apply.
 
@@ -46,21 +76,15 @@ readback verified the new IDs, subnet policies, peerings, unchanged engineering
 network, released state locks and production API HTTP 200. This does not claim
 a routed-packet test from the empty hub.
 
-**Diagram and code boundary:** the PNG, SVG and editable draw.io now show the
-accepted November 16 placement. The central VNet is inside the Hub subscription
-boundary. The two separated blue boxes have the same production subscription
-owner; they are not two subscriptions. The wheel positions, purpose icons and
-actual peering relationship are preserved. Gray dotted rays are visual guides,
-not routes or new peerings.
-
-The public Terraform excerpts and offline model remain the pre-move teaching
-reference. Their address plan and peering intent still apply, but their
-single-root ownership is not today's live state layout. The live connectivity
-root/state owns both peer children across subscriptions; it is separate from
-production's application-spoke owner and Hub monitoring. Backend storage location
-does not determine resource subscription ownership. Do not apply this public lab
-to adopt or modify the existing deployment. No cloud operation is performed by
-publishing the diagram. See [source mapping](SOURCE-MAP.md).
+**Current diagram versus retained code:** the three primary formats now show
+the later seven-spoke expansion. The preceding move is historical context.
+The public Terraform excerpts and offline model remain a smaller pre-move
+teaching reference. Their test results do not validate the current wheel's
+seven connections. The live connectivity state owns the new foundations and
+all peer children; existing engineering/nonproduction VNets and old subnets keep
+their original owners. Backend location does not determine resource ownership.
+See [source mapping](SOURCE-MAP.md). Publishing this diagram performs no cloud
+operation and does not authorize applying the public lab to an existing platform.
 
 See [Azure networking move limitations](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-limitations/networking-move-limitations),
 [changed IDs, dependencies and role-assignment requirements](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-resource-group-and-subscription),
